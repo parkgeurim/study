@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> rollover </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>	
+		*{margin:0; padding:0;}
+		li{list-style:none;}
+		body{background-color:#cecece;}
+			#nav{ width:700px; margin:0 auto;}
+				h3{border-left:10px solid gold;  text-indent:10px; margin:50px 0;}
+				.rollover li{display:inline;}
+
+				.rollover li a:focus{outline:none;}
+				/*
+					a태그에 외곽선은 outline으로 해결이 가능
+						: outline은 사용자가 선택한 부분을 알려주기 위하여 기본적으로 설정하는 것을 권장함
+						: 사용자가 선택한부분이 무엇인지 알수 있을 경우엔
+						outline을 빼도 문제가 없음
+							ex) 글자색상이 바뀜, 이미지교체...
+				*/
+  </style>
+  <script>
+	$(function(){
+		
+		/*
+			+ 첫번째 ( :eq(0) ) 마우스를 올리면 이미지가 교체되도록 만들기 
+				마우스를 내리면 원래대로 돌아가도록 만들기
+					중요: 탭키까지,  접근 대상을 a태그 까지 잡아주면 
+					마우스와 키보드 기능을 함께 사용할 수 있음
+				
+				마우스:
+				mouseover			mouseout
+				mouseenter			mouseleave
+
+				자녀요소가 떨어지거나 기능을 하는 값이 없기 때문에 
+				mouseenter과 mouseleave는 사용하지 않아도 상관없음
+
+
+				중요!)
+					rollover nav의 경우 mouseover, mouseout의 기능을 기본으로 한다.
+						: hover로 대체는 가능하나...키보드 기능을 적용하기가 어렵다.
+
+					mouseover 키보드 == focusin( 연결된 내용이 있을때 사용 ), focus( 겉부분 까지만 접근 )
+					mouseout 키보드 == fousout, blur
+
+					자녀요소가 없고, 연결 객체가 없기 때문에 
+					mouseover, focus	//  mouseout,  blur 사용
+
+					+ 중요!
+						자녀요소 또는 연결된 객체가 있는지 없는지에 따라서
+						기능이 적용이 달라진다. 
+							
+							자녀가 있을 경우 : mouseenter	, focuin  //  mouseleave, focusout
+							자녀가 없을 경우 : mouseover	, focus	  //  mouseout, blur
+		*/
+		
+		$(".rollover li:eq(0) a").bind("mouseover focus",function(){
+			$(this).children("img").attr("src","img/menua_on.gif");
+		}).bind("mouseout blur",function(){
+			$(this).children("img").attr("src","img/menua_off.gif");
+		});
+
+		$(".rollover li:eq(1) a").bind("mouseover focus",function(){
+			$(this).children("img").attr("src","img/menub_on.gif");
+		}).bind("mouseout blur",function(){
+			$(this).children("img").attr("src","img/menub_off.gif");
+		});
+
+		$(".rollover li:eq(2) a").bind("mouseover focus",function(){
+			$(this).children("img").attr("src","img/menuc_on.gif");
+		}).bind("mouseout blur",function(){
+			$(this).children("img").attr("src","img/menuc_off.gif");
+		});
+
+		$(".rollover li:eq(3) a").bind("mouseover focus",function(){
+			$(this).children("img").attr("src","img/menud_on.gif");
+		}).bind("mouseout blur",function(){
+			$(this).children("img").attr("src","img/menud_off.gif");
+		});
+
+		$(".rollover li:eq(4) a").bind("mouseover focus",function(){
+			$(this).children("img").attr("src","img/menue_on.gif");
+		}).bind("mouseout blur",function(){
+			$(this).children("img").attr("src","img/menue_off.gif");
+		});
+	
+	});
+  </script>
+ </head>
+ <body>
+	<div id="nav">
+		<h3>rollover nav</h3>
+		<ul class="rollover">
+			<li><a href="#none" title="고객문의"><img src="img/menua_off.gif" alt="고객문의"/></a></li><!--
+			 --><li><a href="#none" title="행정정보"><img src="img/menub_off.gif" alt="행정정보"/></a></li><!--
+			 --><li><a href="#none" title="뉴스소식"><img src="img/menuc_off.gif" alt="뉴스소식"/></a></li><!--
+			 --><li><a href="#none" title="정책홍보"><img src="img/menud_off.gif" alt="정책홍보"/></a></li><!--
+			 --><li><a href="#none" title="행정안전부"><img src="img/menue_off.gif" alt="행정안전부"/></a></li>
+		</ul>
+	</div>
+ </body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> effect </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <!--
+	주의!
+		제이쿼리를사용하기 위하여 소스파일을 연결할때
+			+ 제이쿼리를 사용하기 위한 소스파일을 가장 먼저 연결하기
+			+ easing효과를 사용하기 위한 소스파일은 그 아래에 적용
+
+			위와 같이 적용해야 제이쿼리의 기능을 사용하면서
+			그중에 easing 효과를 사용할 수 있음
+  -->
+  <script>
+	// 제이쿼리의 문서가 준비가 되면 기능 구현하기
+	jQuery(document).ready(function(){
+		/*
+			+ css버전으로 숨겨지도록 만들기
+
+			btn1을 클릭하면 box1이 숨겨지도록 만들기 css로...
+				대상: btn2
+				이벤트: 클릭
+				이벤트 핸들러: box1
+		*/
+		/*
+		$("#btn1").click(function(){
+			// 이벤트 핸들러: box1이 숨겨지도록 만들기 css
+			$(".box1").css({"display":"none"});	
+		});
+		*/
+
+		/*
+			+ jQuery로 숨겨지도록 만들기 (hide)
+				[ css와 effect 설정의 차이점 ]
+					+ transition의 기능
+						ease, ease-in, ease-in-out, ease-out, linear 효과 밖에 사용하지 못함
+
+					+ display:none, block :: transition 효과가 전혀 적용되지 못한다.
+
+					위에 문제를 해결 하기 위하여 사용하는 것이 jQuery에서의 effect 기능!
+
+			+ btn1을 클릭하면 box1이 사라지도록 만들기 jQuery의 effect 기능중 hide로 사라지도록 만들기
+
+				대상 btn1
+				이벤트: 클릭
+				이벤트 핸들러: box1
+		*/
+
+		$("#btn1").click(function(){
+			/* box1이 hide 효과로 사라지도록 만들기
+			
+			대상 : box1
+			이벤트 : hide
+			이벤트 핸들러 : box1
+
+			 effect를 위하 기본문법
+					대상.이펙트효과(얼마동안(duration), 어떤표현방법(easing),function(){});
+
+			transition에서는 1초를 1s로 사용
+			jQuery에서는 1초를 1000으로 사용
+					+ jQuery에서는 시간 설정이 세분화 하여 사용이 가능!
+
+					1초 == 1000
+					2초 == 2000
+					3초 == 3000
+					...
+					5초 == 5000
+			*/
+			$(".box1").hide(1000,"linear",function(){alert("숨기기 성공!")});
+		
+		});
+
+		/*
+			응용문제1
+				btn2를 클릭하면 box1이 보여지도록 만들기(show)
+					대상.이벤트.이벤트 핸들러 만들기
+						알림창에 (보여지기 성공!)
+		*/
+		/*
+			btn2를 클릭하면 box1이 보여지도록 만들기
+
+			대상: btn2
+			이벤트: 클릭
+			이벤트 핸들러: box1이 보여지도록 만들기
+		*/
+		$("#btn2").click(function(){
+			/* box1이 보여지도록 만들기
+				
+				대상: box1
+				이벤트: show
+				이벤트 핸들러: box1
+			*/
+			$(".box1").show(1000,"easeOutBounce",function(){alert("보여지기 성공");});		
+		});
+
+		/*
+			http://www.tutorialspoint.com/jqueryui/jqueryui_easings.htm
+
+			문제점: easing 효과가 제대로 작동하지 않음!
+				참고사이트: http://jQueryui.com/down
+			+ scriptf로 문제 해결!
+		*/
+
+		/*
+			응용문제2:
+				btn3을 클릭하면 box2가 보이고 있다면 숨겨지게 만들고,
+				숨겨져 있다면 보이게 만들기
+					대상. 이벤트. 이벤트 핸들러
+						: 이벤트 toggle
+						: easing 효과는 알아서 적용
+
+						대상: btn3
+						이벤트: click
+						이벤트 핸들러: box2가 보이고 있다면 숨겨지게 만들고,
+						숨겨져 있다면 보이게 만들기
+		*/
+		$("#btn3").click(function(){
+			// 이벤트 핸들러 : box2가 보이고 있다면 숨겨지게 만들고, 숨겨져 있다면 보이게 만들기
+			// 대상: box3
+			// 이벤트: toggle
+			// 이벤트핸들러: box2
+			$(".box2").toggle(1000,"swing");
+			// function은 필요없으면 제외 가능!
+		});
+
+		/*
+			toggle의 기능은 하나르 가지고 2가지 기능을 제공!
+				숨김과 보여지는 기능을 한꺼번에 가능함!
+
+				제이쿼리 ui 플러그인 없어도 사용할 수 있는 easing
+					ease, ease-in, ease-out, ease-in-out
+					+ linear : 일반적인 효과로 아무 특징없이 부드럽게 움지일때 사용
+					+ swing : 슬라이딩 윈도우에서 이미지가 하나씩 빠져나갈때 손에 잡히는 느낌처럼 사용이 된다.
+		*/
+
+		/*################## 응용문제 #####################*/
+		/*
+			+ btn4를 클릭하면 부모요소 다음요소가 slideUp이 되도록 만들기
+				easing효과는 알아서 작성하기
+					대상.이벤트. 이벤트핸들러 작성하기
+
+					대상: btn4
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 다음요소가 slideUp이 되도록 만들기
+		*/
+		jQuery("#btn4").click(function(){
+			/*
+			대상: 누구의 부모?? btn4의 부모
+			이벤트: slideUp
+			이벤트 핸들러: 부모요소 다음요소
+			*/
+			jQuery("#btn4").parent().next().slideUp(1000,"linear");
+		
+		});
+
+		/*
+			+ btn5를 클릭하면 부모요소 다음요소가 slideDown이 되도록 만들기
+				easing효과는 알아서 작성하기
+					대상.이벤트.이벤트핸들러 작성하기
+
+					대상: btn5
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 다음요소가 slideDown이 되도록 만들기
+		*/
+		jQuery("#btn5").click(function(){
+			/*
+				대상: btn5
+				이벤트: slideDown
+				이벤트 핸들러: 부모요소 다음요소
+			*/
+
+			// easing 효과도 제외 가능 : linear로 바뀌는 경우가 대다수
+			// : 브라우저에서 제공되는 기본 기능으로 바뀜
+			jQuery("#btn5").parent().next().slideDown(500);
+		});
+
+		/*	
+			+ btn6을 클릭하면 부모요소 다음요소가 slideToggle이 되도록 만들기
+				easing효과는 알아서 작성하기
+					대상.이벤트.이벤트핸들러 작성하기
+
+					대상: btn6
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 다음요소가 slideToggle이 되도록 만들기
+		*/
+			jQuery("#btn6").click(function(){
+				/*
+				대상: btn6
+				이벤트: slideToggle
+				이벤트 핸들러: 부모요소 다음요소
+				*/
+				jQuery(this).parent().next().slideToggle(1000);
+			});
+		/*
+			+ btn7을 클릭하면 부모요소 이전요소가 fadeOut이 되도록 만들기
+				easing 효과는 알아서 작성하기
+					대상.이벤트.이벤트핸들러 작성하기
+
+					대상: btn7
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 이전요소가 fadeOut이 되도록 만들기
+		*/
+			jQuery("#btn7").click(function(){
+				/*
+					대상: 자기자신
+					이벤트: fadeOut
+					이벤트 핸들러: 부모요소 이전요소
+						+ duration 부분 : 숫자로도 적용이 가능하지만, 명칭으로도 적용이 가능함
+						+ fast, slow
+						+ 단! 세밀한 작업은 불가능함 (숫자로 적용해야 세밀하게 속도를 표현할 수 있다.)
+				*/
+				jQuery(this).parent().prev().fadeOut("fast");
+			});
+		/*
+			+ btn8을 클릭하면 부모요소 이전요소가 fadeIn이 되도록 만들기
+				easing효과는 알아서 작성하기
+					대상.이벤트.이벤트핸들러 작성하기
+
+					대상: btn8
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 이전요소가 fadeIn이 되도록 만들기
+		*/
+		jQuery("#btn8").click(function(){
+			/*
+				대상:btn8 (자기자신)
+				이벤트: fadeIn
+				이벤트 핸들러: 자기자신의 부모요소 이전요소
+			*/
+			jQuery(this).parent().prev().fadeIn(2000);
+		});
+
+		/*	
+			+ btn9을 클릭하면 부모요소 이전요소가 fadeToggle이 되도록 만들기
+				easing효과는 알아서 작성하기
+					대상.이벤트.이벤트핸들러 작성하기
+
+					대상: btn9
+					이벤트: 클릭
+					이벤트 핸들러: 부모요소 이전요소가 fadeToggle이 되도록 만들기
+		*/
+		jQuery("#btn9").click(function(){
+			/*
+				대상: 자기자신
+				이벤트: fadeToggle
+				이벤트 핸들러: 부모요소 이전요소
+
+					duration, easing, function 제외 가능
+					:	duration, easing 같은 경우에는 제외하면 브라우저에서 제공되는 기본 값으로 바뀜!
+			*/
+			jQuery(this).parent().prev().fadeToggle();
+		});
+
+		/*
+			btn10 버튼을 클릭하면 box3번의 영역이 30% 만큼
+			보이도록 만들기
+
+			대상: btn10
+			이벤트: 클릭
+			이벤트 핸들러: box3
+		*/
+
+		jQuery("#btn10").click(function(){
+			/*
+				box3이 30% 보이도록 만들기
+				대상: box3
+				이벤트: opacity (css) == fadeTo
+				이벤트 핸들러: box3
+			*/
+			jQuery(".box3").fadeTo(500,"0.3");
+		});
+
+		/*
+			fadeTo VS opacity
+				css에서 opacity 사용가능
+					opacity:0.3
+						:: 자체적으로 시간개념이 없음!
+				
+				fadeTo (시간, 투명도)
+		*/
+
+		/*
+			btn11 버튼을 클릭하면 box3번의 영역이 100% 지정한 값 만큼
+			보이도록 만들기
+			
+			대상: btn11
+			이벤트: 클릭
+			이벤트 핸들러: box3
+		*/
+		jQuery("#btn11").click(function(){
+			/*
+				대상:box3
+				이벤트: fadeTo
+				이벤트 핸들러: box3
+			*/
+			jQuery(".box3").fadeTo(500,"1.0");
+		});
+	
+	});
+  </script>
+ </head>
+ <body>
+	<div id="wrap">
+		<h1>제이쿼리의 effect</h1>
+		<dl>
+			<dt>제이쿼리에서 선택자 &amp; effect (효과)</dt>
+			<dd>
+				필수기능: 아코디언, 모달팝업, 탭 베이직, 슬라이딩 윈도우
+			</dd>
+			<dd>
+				<dl>
+					<dt>슬라이딩 윈도우</dt>
+					<dd>
+						슬라이딩 윈도우<br/>
+						부트스트랩(캐로셀)
+					</dd>
+					<dd>
+						최근에는 슬라이딩 윈도우 작업시 (3~4개의 동그라미 버튼 사용)
+					</dd>
+					<dd>
+						반응형이 되는 슬라이딩 윈도우 (직접 제작이 가능해야함)
+					</dd>
+				</dl>
+			</dd>
+		</dl>
+		<p>
+			+ xhtml, html5 (css, css3 == 3.0) : 숨겨주는기능들 display:none, opacity, rgba(),<br/>
+			transparent(투명)<br/><br/>
+			+ jQuery : hide, show, toggle...<br/>
+			+ html5에서 transition 밖에 없었던 기능이 jQuery에서 다양하게 바뀌게 된다.
+		</p>
+		<h2>숨겨지고, 보여지는 버튼 만들기</h2>
+		<p>
+			<button id="btn1">숨김버튼</button>
+			<button id="btn2">보여지는 버튼</button>
+		</p>
+		<p class="box1">
+			숨겨지고, 보여지는 버튼은 선택한 요소를 화면에<br/>
+			노출하고 싶을 경우 또는 사라지게 할 경우 적용하게 된다.<br/>
+			+ jQuery에서 css의 기능을 사용할 수 있음<br/>
+			+ jQuery에서 css의 기능을 사용할 수 있지만, jQuery의 기능을
+			사용하는 이유는 세부설정이 가능하기 때문이다.
+		</p>
+		<h2>숨겨진 값은 보이게, 보이는 값은 숨겨지게 만들기</h2>
+		<p><button id="btn3">숨김/보이기</button></p>
+		<p class="box2">
+			선택한 요소가 숨겨져 있다면 보이게 만들기<br/>
+			선택한 요소가 보이고 있다면 숨겨지게 만들기
+		</p>
+		<h2>슬라이드 효과를 이용한 작업</h2>
+		<p>
+			<button id="btn4">위쪽으로 슬라이드</button>
+			<button id="btn5">아래쪽으로 슬라이드</button>
+			<button id="btn6">두가지 (상하방향) 슬라이드</button>
+		</p>
+		<p>
+			슬라이드 기능은 위와 아래로 미끄러지듯이 올라가거나 내려가는 기능!
+		</p>
+		<h2>서서히 나타나거나, 서서히 사라지는 효과</h2>
+		<p>
+			<button id="btn7">사라지는 버튼</button>
+			<button id="btn8">나타나는 버튼</button>
+			<button id="btn9">나타나거나 사라지는 버튼</button>
+		</p>
+		<p>
+			슬라이드는 상하방향이 미끄러지듯이 움직이는 효과라면,
+			페이드기능은 대상이 서서히 나타나거나 사라지는효과를 말한다.
+		</p>
+
+		<h2>정해진 값 만큼 사라지는 버튼</h2>
+		<p>
+			<button id="btn10">30%만 보이도록 설정하기</button>
+			<button id="btn11">100%만 보이도록 설정하기</button>
+		</p>
+		<p class="box3">
+			해당 버튼을 클릭하면 정해진 값 만큼 보이도록 만든다.<br/>
+			10번 11번 버튼을 클릭하면 box3번의 영역이 지정한 값 만큼<br/>
+			보이도록 만들기
+		</p>
+	</div>
+ </body>
+</html>

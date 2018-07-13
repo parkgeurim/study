@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> parameter </title>
+  <style>		
+	*{margin:0; padding:0;}
+	.box1{border:3px dotted #f0c; padding:30px; margin:30px auto; text-align:center;}
+
+	.box2{ width:200px; height:200px; border-radius:100px; background-color:green; transition:all 1s;}
+	.box2:hover{ transform:scale(0.2);}
+  </style>
+  <script>
+		function colorBtn( fontColor  ){
+			// box에 접근하여 글자 색상 red 표현하기
+			var box = document.getElementById("box");
+			box.style.color=fontColor;
+		}
+
+
+		function bgColorBtn( bgColor ){
+			var box = document.getElementById("box");
+			box.style.backgroundColor = bgColor;
+		}
+
+
+		function styleWidth( sWidth ){
+			var box = document.getElementById("box");
+			box.style.width = sWidth;
+		}
+		
+		function styleBtn(blue, yellow , pxSize ){
+			var box = document.getElementById("box");
+
+			box.style.backgroundColor = blue;
+			box.style.color = yellow;
+			box.style.fontSize = pxSize; 
+		
+		}
+
+
+		function classBox( cName ){
+			var box = document.getElementById("box");
+			/*
+				jQuery
+					대상.addClass
+						: 기존의 클래스명에 더하는 방식
+						class = box1 더하기 box2
+							: class box1 box2 ( 기존의 클래스에 더 함)
+
+				javascript
+					className
+						: 기존의 클래스명 대신에 다른 클래스명으로 교체
+							box1	=> box2로 바뀜
+							: class box2
+			
+			*/
+			
+			box.className = cName;
+		
+		}
+  </script>
+ </head>
+ <body>
+	<h2>parameter : 재료값 넘기기</h2>
+	<p>
+		재료를 넘겨받아서 넘겨받은 재료로 기능을 구현하는 형태<br/>
+		switch(재료) case ?? 라면....
+	</p>
+	<div id="box" class="box1"> parameter </div>
+
+	<input type="button" value="fontRed" onclick="colorBtn('red');"/>
+	<input type="button" value="fontBlue" onclick="colorBtn('blue')"/>
+	<input type="button" value="fontPurple" onclick="colorBtn('purple');"/>
+	<input type="button" value="fontPurple" onclick="colorBtn('pink');"/>
+	<input type="button" value="fontPurple" onclick="colorBtn('orange');"/>
+	<!--
+		01) fontBlue라고 작성하고, 파란색상 넘겨주기, 글씨색상 파란색 적용
+		02) fontPurple 작성하고, 글씨색상 purple 적용하기
+		03) fontPink 작성하고, 글씨색상 pink 적용하기
+		04) fontOrange 작성하고, 글씨색상 orange적용하기 
+	-->
+	
+
+	<input type="button" value="bgPink" onclick="bgColorBtn('pink')"/>
+	<input type="button" value="bgGold" onclick="bgColorBtn('gold')"/>
+	<input type="button" value="bgGray" onclick="bgColorBtn('#ccc')"/>
+	<input type="button" value="bgAqua" onclick="bgColorBtn('aqua')"/>
+	<!--
+		function 새로 만들기
+		05) 재료 값으로 pink 넘겨주기, box 배경색상 바꾸기
+		06) 재료 값으로 gold 넘겨주기, box 배경색상 바꾸기
+		07) 재료 값으로 gray 넘겨주기
+		08) 재료 값으로 aqua 넘겨주기
+	-->
+
+	<input type="button" value="width25%" onclick="styleWidth('25%');"/>
+	<input type="button" value="width100%" onclick="styleWidth('100%');"/>
+	<!--
+		function 새로 만들기 
+		09) 재료값으로 25% 넘겨주기, box 너비 바꾸기
+		10) 재료값으로 100% 넘겨주기, box 너비 바꾸기
+	-->
+	
+
+	<input type="button" value="styleBtn" onclick="styleBtn('blue', '#ff0', '25px')"/>
+	<!--
+		function 새로 만들기
+		11) 배경색상은 파란색, 글자색상은 노란색, 글자크기는 25픽셀 넘겨서
+		적용해주기 
+	-->
+
+	<input type="button" value="classBox1" onclick="classBox('box1')"/>
+	<input type="button" value="classBox2" onclick="classBox('box2')"/>
+ </body>
+</html>

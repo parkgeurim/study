@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> mouseEvent </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>
+		*{margin:0; padding:0;}
+		#wrap{margin:20px; }
+			h1{ background-color:#ff0;}
+			p{ font-size:18px; background-color:#eee; margin:20px 0;}
+
+			h2{ background-color:pink; margin-top:30px; }
+			h3{ margin:20px 0;}
+
+			#title1, #Events{ width:1280px; margin:0 auto;}
+			fieldset{ width:270px; height:100px; padding:10px 10px 0;}
+			input{ border:1px solid #ccc; width:240px; height:25px; padding:3px 10px; margin-top:2px;}
+  </style>
+  <script>
+
+	jQuery(document).ready(function(){
+	/*#################### 메서드 체인 #########################*/
+	/*
+		대상은 같고 기능이 다를때 사용하는 방법
+			대상.기능1.기능2.기능3;
+	*/
+
+
+	/*############# btn1Click 의 클릭과 더블클릭 이벤트 #############*/
+		$("#btn1Click").click(function(){
+			$("#Events").css({"backgroundColor":"blue"}).fadeTo(500,"0.3");
+		}).dblclick(function(){
+			$("#title1").fadeOut(500, "linear",function(){
+				alert("페이드 성공! ");
+			});
+		});
+
+	/*############# btn2Mouseover의 마우스오버와 아웃 #############
+
+		ver1: 마우스기능, 키보드 기능 따로 묶어서 사용
+
+		+ 마우스 기능
+		$("#btn2Mouseover").mouseover(function(){
+			$("#Events").css({"backgroundColor":"#ff0","color":"#f00"});
+			$("strong").css({"backgroundColor":"aqua","textDecoration":"underline"});
+		}).mouseout(function(){
+			$("#Events").css({"backgroundColor":"red","color":"#ff0"});
+			$("strong").css({"background":"none","fontSize":"20px","fontStyle":"italic"});
+		});
+
+
+	/*############# btn2Mouseover의 focus와 blur #############
+		
+		+키보드기능
+		
+		$("#btn2Mouseover").focus(function(){
+			$("#Events").css({"backgroundColor":"green","color":"pink"});
+		}).blur(function(){
+			$("#Events").css({"backgroundColor":"pink","color":"green"}
+		});
+	
+		
+		ver2: 대상은 같고 마우스와 키보드 기능이 같은거 끼리 묶어주기
+			+ mouseover는 focus와 묶어주기 
+			+ mouseout은 blur 묶어주기
+
+			: 같은 기능끼리 묶어주기
+				단! 마우스기능과 키보드 기능이 같아한다.
+				장애가 있는 사람들도 똑같은 결과나 똑같은 표현방법으로 볼 수 있어야 한다.
+
+		ver3: 
+			1) 대상은 같고, 키보드 마우스 기능이 같은거 끼리 묶어주고
+		    2) 적용하는 기능, 해제 하는 기능끼리도 기능이 같아야 함!
+
+	*/
+
+		$("#btn2Mouseover").mouseover(function(){
+			$("#Events").css({"backgroundColor":"#ff0","color":"#f00"});
+			$("strong").css({"backgroundColor":"aqua","textDecoration":"underline"});
+		}).focus(function(){
+			$("#Events").css({"backgroundColor":"#ff0","color":"#f00"});
+			$("strong").css({"backgroundColor":"aqua","textDecoration":"underline"});
+		}).mouseout(function(){
+			$("#Events").css({"backgroundColor":"red","color":"#ff0"});
+			$("strong").css({"background":"none","fontSize":"20px","fontStyle":"italic"});
+		}).blur(function(){
+			$("#Events").css({"backgroundColor":"red","color":"#ff0"});
+			$("strong").css({"background":"none","fontSize":"20px","fontStyle":"italic"});
+		});
+	});
+  </script>
+ </head>
+ <body>
+	<div id="wrap">
+		<h1>마우스와 키보드 EVENT</h1>
+		<div id="title1">
+			<h3>html5 &amp; xhtml 에서 사용했던 기능</h3>
+			<p>
+				<strong>xhtml문서에 사용했던 기능</strong><br/>
+				+ 탭으로만 작동하는 네비게이션 (skipNav )<br/>
+				+ a( 유일하게 클릭 ( 사이트 이동) ), focus( 유일하게 탭키 적용 )
+			</p>
+			<p>
+				<strong>html5에서 사용했던 기능</strong><br/>
+				+ 대상:hover <br/>
+				+ hover ??? 마우스 기능중에는 css에서 사용할수 있는게 없음...<br/>
+				+ 이벤트의 다양함이 부족하여 jQuery, javascript로 해당하는 이벤트를 활용
+			</p>
+		</div>
+		<div id="Events">
+			<h3>이벤트: 대상에 자극을 주는 행위</h3>
+			<p>
+				모바일에서는 탭키 작동이 없음<br/>
+				음성브라우저를 활용하여 웹접근성을 보완함<br/>
+				css에서는 hover와 focus가 유일하게 이벤트 기능을 제공함
+			</p>
+			<h3> 마우스 관련 이벤트 </h3>
+			<p>hover, click, dblclick, mouseover, mouseout, mouseenter.....</p>
+
+			<h3> 키보드 관련 이벤트 </h3>
+			<p>focus, focusin, focusout, keydown, keyup...</p>
+
+			<h3> 버튼관련 이벤트 </h3>
+			<p> submit(전송), reset(새로고침), button... </p>
+		</div>
+		
+		<h2> click 메서드( 기능 ) </h2>
+		<p><button id="btn1Click">btnClick</button></p>
+		<div id="mouseTest">
+			<h3>마우스 이벤트 확인하기</h3>
+			<div id="input">
+				현재 영역을 마우스 이벤트가 발생되도록 만들기
+			</div>
+		</div>
+		
+		<h2>mouseover 메서드</h2>
+		<p><button id="btn2Mouseover">mouseover</button></p>
+		<p>
+			mouseover는 대상에 마우스를 올리면 발생하는 이벤트<br/>
+			hover와 다른점은??
+		</p>
+
+		<h2>hover 메서드</h2>
+		<h3><a href="#none" title="hover" class="hover">hover</a></h3>
+		<dl>
+			<dt> css의 hover와 jQuery에서의 hover의 차이점 </dt>
+			<dd>
+				css: 대상:hover <br/>
+				xhtml 버전에서는 숨겨주고 나타날때 사용, display:none, display:block주로 사용<br/>
+				html5 버전에서는 동적인 기능을 추가하여 기능이 원활하게 나올수 있도록 사용
+			</dd>
+			<dd>
+				jQuery의 hover 기능( 실습에서 css와 차이점을 구별! )
+			</dd>
+		</dl>
+
+		<h2> focus 메서드1 </h2>
+		<p><button id="btnFocus">focus</button></p>
+		<p>
+			마우스 기능을 대신하여 tab키로 접근 가능하도록 만드는 기능<br/>
+			+ a태그가 있으면 focus 접근이 가능<br/>
+			+ jQuery에서는 focus이벤트를 대상에게 부여할 수 있음
+		</p>
+
+		<h2> focus 메서드2 </h2>
+		<form action="#none" method="post" id="form">
+			<fieldset>
+				<legend>로그인</legend>
+				<input id="userid" type="text" name="userid" title="아이디입력"/>
+				<input id="userpw" type="password" name="userpw" title="비밀번호입력"/>
+			</fieldset>
+		</form>
+	</div>
+ </body>
+</html>

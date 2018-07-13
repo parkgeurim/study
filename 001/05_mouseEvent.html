@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> mouseEvent </title>
+  <script>
+		function onClickBtn(){ alert("클릭성공!"); }
+		function onDblBtn(){ alert("더블클릭 성공!"); }
+		function onmouseMov(){ alert("마우스 움직이기 성공!"); }
+		function onmouseOut(){ alert("마우스 아웃 성공!"); }
+		function onmouseUp(){ alert("마우스 업 성공!");}
+
+		function onMsDown(){
+			/*
+				select에서 선택한 내용이 input 공간에 나타나도록 만들기 !
+					: 내용이 나타날 공간 (enters) 
+					: 선택할 공간 ( mousedown )
+						: 현재 컨트롤 값들은 전부 태그로 만들어져 있기 때문에
+						id 값으로 만들어서 사용!
+			*/
+
+			var enters = document.getElementById("enters");
+			var mousedown = document.getElementById("mousedown");
+
+			// console.log( mousedown );
+			/*
+				응용문제
+				mousedown에 있는 값을 선택하면 enters 공간에 나타나게 만들기
+			*/
+			enters.value = mousedown.value;
+		}
+
+  </script>
+ </head>
+ <body>
+	<h2>onclick : 클릭할때 생기는 이벤트</h2>
+	<input id="clickBtn" type="button" value="클릭" onclick="onClickBtn();"/>
+	
+	<h2>ondblclick : 더블클릭 할때 생기는 이벤트</h2>
+	<input id="dblBtn" type="button" value="더블클릭" ondblclick="onDblBtn();"/>
+
+	<h2>onmousemove : 마우스가 움직일때 생기는 이벤트</h2>
+	<input id="mouseMov" type="button" value="마우스 움직이기" onmousemove="onmouseMov();"/>
+
+	<h2>mouseout : 마우스가 바깥으로 나가면 생기는 이벤트</h2>
+	<input id="mouseOut" type="button" value="마우스 아웃" onmouseout="onmouseOut();"/>
+
+	<h2>onmouseup : 1) 해당하는 값 누르기, 2) 해당하는 값에서 마우스를 놓을때 생기는 이벤트 </h2>
+	<input id="mouseUp" type="button" value="마우스 업" onmouseup="onmouseUp();"/>
+
+	<h2>onmouseDown</h2>
+	<input id="enters" type="text" name="enters"/>
+	<select id="mousedown" onmousedown="onMsDown();">
+		<option value="kor">한국</option>
+		<option value="eng">미국</option>
+		<option value="jpn">일본</option>
+	</select>
+ </body>
+</html>

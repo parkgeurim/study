@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> animation_circle </title>
+  <style>
+	*{margin:0; padding:0;}
+	li{list-style:none;}
+
+	ul{ width:1280px; margin:0 auto; position:relative;}
+		ul li{
+			width:100px; height:100px; 
+			background-color:pink;
+			border-radius:50px;
+			text-align:center; 
+			line-height:100px;
+			position:absolute;
+			left:0; top:0;
+			/*animation:circles 3s infinite alternate ease-in;*/
+			animation-name:circles;
+			animation-duration:3s;
+			animation-iteration-count:infinite;
+			animation-direction:alternate;
+		}
+
+		.red{ top:100px; background-color:red; animation-timing-function:linear;}
+		.brown{top:200px; background-color:brown;  animation-timing-function:ease;}
+		.green{top:300px; background-color:green; animation-timing-function:ease-in;}
+		.blue{top:400px; background-color:blue; animation-timing-function:ease-out;}
+		.purple{top:500px; background-color:purple; animation-timing-function:ease-in-out;}
+		.black{top:600px; background-color:black; color:#fff;
+			animation-direction:reverse;
+		}
+
+		@keyframes circles{ 100%{left:99%; transform:rotate(360deg); } }
+
+  </style>
+ </head>
+ <body>
+	<ul>
+		<li class="red">red</li>
+		<li class="brown">brown</li>
+		<li class="green">green</li>
+		<li class="blue">blue</li>
+		<li class="purple">purple</li>
+		<li class="black">black</li>
+	</ul>
+ </body>
+</html>

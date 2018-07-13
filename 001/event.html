@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8"/>
+		<title> mouse event </title>
+	</head>
+	<body>
+		<h1>마우스와 키보드 EVENT</h1>
+		<div class="box-01">
+			<h2>xhtml 에서 사용할 수 있는 event 기능</h2>
+			<div class="desc">
+				<ol>
+					<li><strong>a 태그 : 유일한 클릭이벤트</strong></li>
+					<li>
+						<strong>대상:focus</strong>
+						마우스 기능을 대신하여 tab키로 접근 가능하도록 만드는 기능<br/>
+						+ <span>a태그가 있으면</span> focus 접근이 가능<br/>
+						+ jQuery에서는 focus이벤트를 a태그가 아닌 다른 대상에게 부여할 수 있음
+					</li>
+					<li>탭키로 작동할 수 있는 skip navigation</li>
+				</ol>
+			</div>
+		</div>
+		<div class="box-02">
+			<h2>html5에서 사용할 수 있는 event 기능</h2>
+			<div class="desc">
+				<ol>
+					<li>a 태그</li>
+					<li>대상:focus </li>
+					<li>대상:hover</li>
+					<li>이벤트의 기능이 다양하지 못하기 때문에 jQuery, javacript의 기능들을 활용한다.</li>
+				</ol>
+			</div>
+		</div>
+		<div class="box-03">
+			<h2>jQuery에서 사용할 수 있는 event 기능</h2>
+			<div class="box-03-1">
+				<h3>1.click</h3>
+				<div class="desc">
+					$('#clickEvent').click(function(){
+						<br><br>
+						$(this).css({'backgroundColor':'lightblue'}).fadeTd(1000,'0.3');
+						<br><br>
+					});
+				</div>
+				<div id="clickEvent" class="box">
+					대상을 <strong>클릭</strong>하면 배경색상 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>2.mouseover</h3>
+				<div class="desc">
+					$('#mouseoverEvent').mouseover(function(){
+						<br><br>
+						$(this).animate({'color':'#f00'},500,liner);
+						<br><br>
+					});
+				</div>
+				<div id="mouseoverEvent" class="box">
+					대상에 <strong>mouseover</strong>하면 글자색상 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>2.mouseenter</h3>
+				<div class="desc">
+					$('#mouseenterEvent').mouseenter(function(){
+						<br><br>
+						$(this).animate({'color':'#f00'},500,liner);
+						<br><br>
+					});
+				</div>
+				<div id="mouseenterEvent" class="box">
+					대상에 <strong>mouseenter</strong>하면 글자색상 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>3.mouseout</h3>
+				<div class="desc">
+					$('#mouseoutEvent').mouseout(function(){
+						<br><br>
+						$(this).animate({'borderRadius':'50%'},500,ease);
+						<br><br>
+					});
+				</div>
+				<div id="mouseoutEvent" class="box">
+					대상에 <strong>mouseout</strong>하면 border-radius 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>3.mouseleave</h3>
+				<div class="desc">
+					$('#mouseleaveEvent').mouseleave(function(){
+						<br><br>
+						$(this).animate({'borderRadius':'50%'},500,ease);
+						<br><br>
+					});
+				</div>
+				<div id="mouseoutEvent" class="box">
+					대상에 <strong>mouseleave</strong>하면 border-radius 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>3.mouseout</h3>
+				<div class="desc">
+					$('#mouseoutEvent').mouseout(function(){
+						<br><br>
+						$(this).animate({'borderRadius':'50%'},500,ease);
+						<br><br>
+					});
+				</div>
+				<div id="mouseoutEvent" class="box">
+					대상에 <strong>mouseout</strong>하면 border-radius 변경
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>4.dblclick</h3>
+				<div class="desc">
+					$('#dblclickEvent').dblclick(function(){
+						<br><br>
+						alert('더블클릭!');
+						<br><br>
+					});
+				</div>
+				<div id="dblclickEvent" class="box">
+					대상에 <strong>더블클릭</strong>하면 alert창 만들기
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>5.focus</h3>
+				<div class="desc">
+					$('#focusEvent').focus(function(){
+						<br><br>
+						alert('focus!');
+						<br><br>
+					});
+				</div>
+				<div class="box">
+					대상에 <strong>focus</strong>하면 alert창 만들기<br/>
+					<button id="focusEvent">focus</button>
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>6.blur</h3>
+				<div class="desc">
+					$('#blurEvent').blur(function(){
+						<br><br>
+						alert('focus!');
+						<br><br>
+					});
+				</div>
+				<div class="box">
+					대상에 <strong>blur(포커스가 흐려짐)</strong>하면 alert창 만들기<br/>
+					<button id="blurEvent">blur</button>
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>7.focusin</h3>
+				<div class="desc">
+					$('#focusinEvent').focusin(function(){
+						<br><br>
+						alert('focusin!');
+						<br><br>
+					});
+				</div>
+				<div class="box">
+					대상에 <strong>focusin</strong>하면 alert창 만들기<br/>
+					<button id="focusinEvent">focus</button>
+				</div>
+			</div>
+			
+			<div class="box-03-1">
+				<h3>7.focusout</h3>
+				<div class="desc">
+					$('#focusoutEvent').focusin(function(){
+						<br><br>
+						alert('focusout!');
+						<br><br>
+					});
+				</div>
+				<div class="box">
+					대상에 <strong>focusout</strong>하면 alert창 만들기<br/>
+					<button id="focusoutEvent">focus</button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+</html>

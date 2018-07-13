@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title>nav</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>
+	* {margin:0; padding:0;}
+	a:link, a:visited {text-decoration:none; color:#fff;}
+	a:hover, a:focus {color:#f00; text-decoration:underline;}
+	li {list-style:none;}
+
+		div {width:800px; margin:0 auto; position:relative; top:30px;}
+			#parent {width:100%;}
+				#parent li {width:20%; float:left; background-color:blue; text-align:center;
+				line-height:40px; /*outline:1px solid #fff;*/ border-right:1px solid #fff;
+				border-top:1px solid #fff; box-sizing:border-box;}
+					#parent li .son {width:100%;}
+						#parent li .son li {width:100%; border-right:0;/*중첩되는 값 빼주기*/}
+
+		/*
+			outline의 문제점 : 나중에 생성된다.
+				해결할 수 있는 방법: 
+					+margin-right? 
+					+ border
+						margin의 경우에는 마우스가 빈공간에 떨어지면 slide기능들이 
+						사라져 버릴 수 있다.
+
+				+ border로 해결하기!
+
+				+ outline의 경우에는 정적인 페이지에서 빨리 배치할때 사용
+					+동적인 요소에서는 깜박이는 것이 보임
+
+				: 해결
+					box-sizing:border-box;
+						border가 박스사이즈를 자동으로 계산하고 크기에 맞춰서
+						테두리를 생성할 수 있다.
+							+ 크로스 브라우징도 가능함
+		*/
+
+			#parent:after {content:""; display:block; clear:both;}
+  </style>
+  <script>
+	$(function(){
+		$(".son").hide();
+
+		$("#parent li").mouseover(function(){
+			$(this).children(".son").stop().slideDown(500);
+		}).mouseout(function(){
+			$(this).children(".son").stop().slideUp(500);		
+		});
+
+		/*
+			01) outline의 문제점 발생
+				+ 네비게이션이 작동한 다음에 구분선이 나타남
+
+			02) 네비게이션이 멈추지 않고 wave현상이 생김
+				display:none과 block은 wave현상이 생기지 않음
+				slideUp, slideDown은 작업하면 wave현상이 생김
+
+					+ display: 시간의 개념이 없음
+					+ slide : 시간의 개념이 있음
+
+
+					mouseover ==> mouseenter
+					mouseout ==> mouseleave
+
+					+ mouseover와 mouseout은 wave현상이 심하게 생긴다.
+						: 자녀요소들을 기다려주지 않고, 부모가 할일이 끝나면 바로 기능을
+						적용하거나 멈추려고 한다.
+							+ 반응속도가 빠르고, 속해있는 기능이 많지 않을때 사용한다.
+
+					+ mouseenter, mouseleave은 wave 현상이 덜 생긴다.
+						: 자녀요소가 할일이 있다면 기다려준다. mouseenter는
+						자녀요소에 입력받을 값이 있기 때문에 기다려주려고 한다.
+							+ 속해있는 기능이 많을때 사용
+
+					+ 중요! ) css의 hover는 mouseenter와, mouseleave를 동시에 가지고 있다.
+
+					+ 문제점 : mouseenter와 mouseleave를 사용해도 wave현상이 발생한다.
+						+ 할당된 시간이 끝나기도 전에 다시 시간이 쌓이기 때문에
+							wave현상이 생기는 문제가 발생한다.
+							
+					+ 문제점: 시간이 메모리로 쌓여서 문제가 발생함
+					+ 해결: 메모리 지우기
+						+ 메모리: Queue (큐)
+						+ 메모리 지우기 : clearQueue
+
+
+					+ clearQueue() : 쌓여있는 시간(메모리)을 비우기 위해 사용하였으나
+					시간이 쌓이기도 전에 비우는 성질을 가지고 있어서 제대로 작동이 되지 않는다.
+
+					+ stop() 메모리와 상관이 없음
+
+						+ stop() : 반복문안에서 사용하게되면 반복문이 절대로 작동하지 않는다.	
+						+ clearQueue : 반복문 설정시 반복문이 돌아갈 수 있도록 기능을 방해하지 않는다.
+
+
+						+ 중요! ) stop이나 clearQueue는 시간이나 메모리를 멈출때 사용한다.
+							ex) slide, fade처럼 시간을 가지는 개념 앞에다가 사용한다.
+
+
+		*/
+		
+	
+	});
+  </script>
+ </head>
+ <body>
+	<div id="content">
+		<ul id="parent">
+			<li>
+				<a href="#none" title="로그인">로그인</a>
+				<ul class="son">
+					<li><a href="#none" title="정회원 로그인">정회원 로그인</a></li>
+					<li><a href="#none" title="비회원 로그인">비회원로그인</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#none" title="뉴스">뉴스</a>
+				<ul class="son">
+					<li><a href="#none" title="정치">정치</a></li>
+					<li><a href="#none" title="경제">경제</a></li>
+					<li><a href="#none" title="스포츠">스포츠</a></li>
+					<li><a href="#none" title="지도">지도</a></li>
+					<li><a href="#none" title="블로그">블로그</a></li>
+					<li><a href="#none" title="카페">카페</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#none" title="갤러리">갤러리</a>
+				<ul class="son">
+					<li><a href="#none" title="정회원 갤러리">정회원 갤러리</a></li>
+					<li><a href="#none" title="비회원 갤러리">비회원 갤러리</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#none" title="게시판">게시판</a>
+				<ul class="son">
+					<li><a href="#none" title="정치 게시판">정치 게시판</a></li>
+					<li><a href="#none" title="경제 게시판">경제 게시판</a></li>
+					<li><a href="#none" title="스포츠 게시판">스포츠 게시판</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#none" title="상세문의">상세문의</a>
+				<ul class="son">
+					<li><a href="#none" title="정치 문의">정치 문의</a></li>
+					<li><a href="#none" title="경제 문의">경제 문의</a></li>
+					<li><a href="#none" title="스포츠 문의">스포츠 문의</a></li>
+					<li><a href="#none" title="카페 문의">카페 문의</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+ </body>
+</html>

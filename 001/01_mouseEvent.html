@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> mouseEvent </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>
+		*{margin:0; padding:0;}
+		#wrap{margin:20px; }
+			h1{ background-color:#ff0;}
+			p{ font-size:18px; background-color:#eee; margin:20px 0;}
+
+			h2{ background-color:pink; margin-top:30px; }
+			h3{ margin:20px 0;}
+
+			#title1, #Events{ width:1280px; margin:0 auto;}
+			fieldset{ width:270px; height:100px; padding:10px 10px 0;}
+			input{ border:1px solid #ccc; width:240px; height:25px; padding:3px 10px; margin-top:2px;}
+  </style>
+  <script>
+
+	jQuery(document).ready(function(){
+	
+	/*
+		01) 첫번째 문법 사용하기 
+	*/
+
+	/*
+		02) btn1Click 클릭을 하면 Events영역의 배경색상이 파란색으로 변경
+		글자색상은 ccc, 0.5초 동안 30% 투명도 추가
+			대상. 이벤트. 이벤트 핸들러 작성하기
+	
+			대상: btn1Click
+			이벤트: 클릭
+			이벤트 핸들러 Events영역이 배경색상이 파란색으로 변경
+									글자색상은 ccc, 0.5초 동안 30% 투명도 추가
+				
+				+ css()
+				+ fadeTo()
+	*/
+
+		$("#btn1Click").click(function(){
+			/*
+				이벤트 핸들러 Events영역이 배경색상이 파란색으로 변경
+									글자색상은 ccc, 0.5초 동안 30% 투명도 추가
+			
+					대상: Events
+					이벤트: css, fadeTo
+					이벤트 핸들러: 대상과 같음
+			*/
+			$("#Events").css({"backgroundColor":"blue"}).fadeTo(500,"0.3");
+		});
+
+
+
+	/*
+		03) btn2Mouseover에 mouseover하면 Events영역의 배경색상이 노란색 변경
+		글자색상 red작성 ( 기본기능은 클릭과 같음 )
+			대상. 이벤트. 이벤트 핸들러 작성하기
+
+			대상: btn2Mouseover
+			이벤트: mouseover
+			이벤트 핸들러: Events 배경색상이 노란색 변경, 글자색상 red작성
+	*/
+
+	$("#btn2Mouseover").mouseover(function(){
+			/*
+				이벤트 핸들러: Events 배경색상이 노란색 변경, 글자색상 red작성
+
+				대상: Events
+				이벤트: css
+				이벤트 핸들러 : 대상과 같음
+			*/
+
+			$("#Events").css({"backgroundColor":"#ff0","color":"#f00"});
+
+			/*
+				+ 추가문제
+				문제 3번을 푼 영역에 작업하기 strong태그에 전부 배경색상 aqua 적용, 밑줄 만들기
+					
+					대상: strong
+					이벤트: css
+					이벤트 핸들러: 대상과 같음
+			*/
+
+			$("strong").css({"backgroundColor":"aqua","textDecoration":"underline"});
+	
+	});
+
+	
+	/*
+		04) btn2Mouseover에 mouseout하면 Events영역의 배경색상이 빨간색 변경,
+		글자색상 노란색 변경
+			대상. 이벤트. 이벤트 핸들러 작성하기
+
+			+ 대상:  btn2Mouseover
+			+ 이벤트 : mouseout
+			+ 이벤트 핸들러 :  Events영역의 배경색상이 빨간색 변경, 글자색상 노란색 변경
+	*/
+	$("#btn2Mouseover").mouseout(function(){
+		/*
+			이벤트 핸들러 :  Events영역의 배경색상이 빨간색 변경, 글자색상 노란색 변경
+
+			대상: Events
+			이벤트: css
+			이벤트 핸들러: 대상과 같음
+		*/
+
+		$("#Events").css({"backgroundColor":"red","color":"#ff0"});
+
+		/*
+			추가문제
+			문제 4번을 푼 영역에 작업하기 strong태그에 배경색상 없에고, 글자크기 20픽셀, 글자 기울이기 
+
+				대상: strong
+				이벤트: css
+				이벤트 핸들러 : strong( 대상과 같음)
+		*/
+
+		$("strong").css({"background":"none","fontSize":"20px","fontStyle":"italic"});
+
+	});
+
+
+	/*
+
+		05) btn1Click에 더블클릭하면 title1영역이 fadeOut되면서 사라지게 만들기
+		기능은 알림창 띄우기 
+			대상. 이벤트. 이벤트 핸들러 작성하기
+			
+			대상: btn1Click
+			이벤트: dblclick
+			이벤트 핸들러 :  title1영역이 fadeOut되면서 사라지게 만들기 기능은 알림창 띄우기 
+	*/
+
+	$("#btn1Click").dblclick(function(){
+		/*
+			title1영역이 fadeOut되면서 사라지게 만들기 기능은 알림창 띄우기
+
+			대상: title1
+			이벤트: fadeOut
+			이벤트 핸들러 : 알림창띄우기
+		*/
+
+		// 대상.effect(duration, easing, function(){  })
+		$("#title1").fadeOut(500, "linear",function(){
+			alert("페이드 성공! ");
+		});
+	
+	});
+
+	/*
+		중요! 어떤 대상에 click 기능을 사용했다면 다시 같은 대상에 
+		click을 사용하기가 어렵다. 
+		( 둘중에 하나는 기능이 무시당한다. 
+		앞에 있던 값들이 뒤에 있는 값에 무시당하는 경우가 대부분! )
+			
+			+ 아래와 같이 대상은 같고 기능이 다를때 이벤트 적용이 가능
+				+ 대상1은 같고 이벤트로 click과 dblclick 처럼  기능이 다를때는 적용가능
+				+ 같은대상에 같은 이벤트를 적용하려면 javascript로 해결해야 한다.
+	
+	*/
+
+	/*
+		추가 문제 
+			+ 06) 문제 3번을 푼 영역에 작업하기 strong태그에 전부 배경색상 aqua 적용,
+			밑줄 만들기
+				대상. 이벤트. 이벤트 핸들러 작성하기
+
+			+ 07) 문제 4번을 푼 영역에 작업하기 strong태그에 배경색상 없에고, 글자크기 20픽셀
+			글자 기울이기 
+				대상. 이벤트. 이벤트 핸들러 작성하기
+	*/
+
+	/*
+		08) btn2Mouseover에 focus를 하면 mouseTest의 배경색상이 초록색, 글자색상이
+		핑크색상으로 나오도록 만들기 
+			+ 클릭과 방법이 같음
+				
+				대상: btn2Mouseover
+				이벤트: focus
+				이벤트 핸들러: mouseTest 배경색상이 초록색, 글자색상이 핑크색상으로 나오도록 만들기 
+	*/
+
+		$("#btn2Mouseover").focus(function(){
+			$("#mouseTest").css({"backgroundColor":"green","color":"pink"});
+		});
+
+		// + 중요! 탭키가 닿으면 a태그가 없는 대상에도 효과 적용이 가능하다
+		
+		/*
+			09) btn2Mouseover에서 focus가 벗어나면 Events 의 배경색상이
+			핑크색상, 글자색상 초록색상으로 나오도록 만들기 
+				
+				대상: btn2Mouseover
+				이벤트: blur
+				이벤트 핸들러: Events 배경색상이 핑크색상, 글자색상 초록색상으로 나오도록 만들기 
+		*/
+		$("#btn2Mouseover").blur(function(){
+			$("#Events").css({"backgroundColor":"pink","color":"green"});
+		
+		});
+
+		/*
+			중요!
+				focus는 초점이 맞았을때 기능이 구현되도록 표현
+				blur은 초점이 흐려졌을때 기능이 구현되도록 표현
+
+					반대기능들
+						mouseover 반대는 mouseout
+						focusin 반대는 focusout
+						focus 반대는 blur
+
+					키보드와 마우스로 같이 제공되어야 하는 기능들
+					click							focus
+					mouseover				foucs or focusin	== tab+enter
+					mouseout				blur or focusout  == tab이 벗어나게 만들기 
+		
+		*/
+		
+
+	});
+  </script>
+ </head>
+ <body>
+	<div id="wrap">
+		<h1>마우스와 키보드 EVENT</h1>
+		<div id="title1">
+			<h3>html5 &amp; xhtml 에서 사용했던 기능</h3>
+			<p>
+				<strong>xhtml문서에 사용했던 기능</strong><br/>
+				+ 탭으로만 작동하는 네비게이션 (skipNav )<br/>
+				+ a( 유일하게 클릭 ( 사이트 이동) ), focus( 유일하게 탭키 적용 )
+			</p>
+			<p>
+				<strong>html5에서 사용했던 기능</strong><br/>
+				+ 대상:hover <br/>
+				+ hover ??? 마우스 기능중에는 css에서 사용할수 있는게 없음...<br/>
+				+ 이벤트의 다양함이 부족하여 jQuery, javascript로 해당하는 이벤트를 활용
+			</p>
+		</div>
+		<div id="Events">
+			<h3>이벤트: 대상에 자극을 주는 행위</h3>
+			<p>
+				모바일에서는 탭키 작동이 없음<br/>
+				음성브라우저를 활용하여 웹접근성을 보완함<br/>
+				css에서는 hover와 focus가 유일하게 이벤트 기능을 제공함
+			</p>
+			<h3> 마우스 관련 이벤트 </h3>
+			<p>hover, click, dblclick, mouseover, mouseout, mouseenter.....</p>
+
+			<h3> 키보드 관련 이벤트 </h3>
+			<p>focus, focusin, focusout, keydown, keyup...</p>
+
+			<h3> 버튼관련 이벤트 </h3>
+			<p> submit(전송), reset(새로고침), button... </p>
+		</div>
+		
+		<h2> click 메서드( 기능 ) </h2>
+		<p><button id="btn1Click">btnClick</button></p>
+		<div id="mouseTest">
+			<h3>마우스 이벤트 확인하기</h3>
+			<div id="input">
+				현재 영역을 마우스 이벤트가 발생되도록 만들기
+			</div>
+		</div>
+		
+		<h2>mouseover 메서드</h2>
+		<p><button id="btn2Mouseover">mouseover</button></p>
+		<p>
+			mouseover는 대상에 마우스를 올리면 발생하는 이벤트<br/>
+			hover와 다른점은??
+		</p>
+
+		<h2>hover 메서드</h2>
+		<h3><a href="#none" title="hover" class="hover">hover</a></h3>
+		<dl>
+			<dt> css의 hover와 jQuery에서의 hover의 차이점 </dt>
+			<dd>
+				css: 대상:hover <br/>
+				xhtml 버전에서는 숨겨주고 나타날때 사용, display:none, display:block주로 사용<br/>
+				html5 버전에서는 동적인 기능을 추가하여 기능이 원활하게 나올수 있도록 사용
+			</dd>
+			<dd>
+				jQuery의 hover 기능( 실습에서 css와 차이점을 구별! )
+			</dd>
+		</dl>
+
+		<h2> focus 메서드1 </h2>
+		<p><button id="btnFocus">focus</button></p>
+		<p>
+			마우스 기능을 대신하여 tab키로 접근 가능하도록 만드는 기능<br/>
+			+ a태그가 있으면 focus 접근이 가능<br/>
+			+ jQuery에서는 focus이벤트를 대상에게 부여할 수 있음
+		</p>
+
+		<h2> focus 메서드2 </h2>
+		<form action="#none" method="post" id="form">
+			<fieldset>
+				<legend>로그인</legend>
+				<input id="userid" type="text" name="userid" title="아이디입력"/>
+				<input id="userpw" type="password" name="userpw" title="비밀번호입력"/>
+			</fieldset>
+		</form>
+	</div>
+ </body>
+</html>
