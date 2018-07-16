@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8"/>
+		<title> mouse event </title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<style>
+		* {margin:0; padding:0;}
+		a:link, a:visited {text-decoration:none; color:#fff;}
+		a:hover, a:focus {color:#f00; text-decoration:underline;}
+		li {list-style:none;}
+		.wrapper {width:960px; margin:0 auto;}
+
+		.outer, .outer2 {
+			width: 200px;
+			height: 200px;
+			background: Orange;
+			padding: 50px;
+			margin: 10px;
+		}
+
+		.inner {
+			width: 100%;
+			height: 100%;
+			background: Pink;
+		}
+
+		.dep1 {
+		   width: 200px;
+		   height: 200px;
+		   display: block;
+		   background-color: #dcdcdc;
+		}
+		.dep2 {
+		   width: 100px;
+		   height: 100px;
+		   display: block;
+		   margin: 3px auto;
+		   background-color: #ececec;
+		}
+		button {
+		   display: block;
+		   margin: 0 auto;
+		}
+		
+		.css_test {
+			border-radius : 5px;
+			border : 3px solid gray;
+			padding : 20px;
+			text-align : center;
+		}
+		.css_test img {
+			cursor : pointer;
+			position : relative;
+		}
+		</style>
+
+		<script>
+		$(function(){
+			// 마우스오버
+			$('.outer')
+			.mouseover(function(){
+				$('.overEvent').append('<p>마우스오버가 발생했습니다.</p>')
+			})
+			.mouseenter(function(){
+				$('.overEvent').append('<p style="color:#f00; font-weight:">마우스엔터가 발생했습니다.</p>')
+			});
+
+			$('.outer2')
+			.mouseout(function(){
+				$('.dif_desc2').append('<p>마우스아웃이 발생했습니다.</p>')
+			})
+			.mouseleave(function(){
+				$('.dif_desc2').append('<p style="color:#f00; font-weight:">마우스리브가 발생했습니다.</p>')
+			});
+			// 마우스오버
+
+			// 포커스
+			$('.parent').focusin(function(){
+				console.log('부모 focusin!');
+			});
+			$('input').focusin(function(){
+				console.log('인풋 focusin!');
+			});
+			$('.parent').focus(function(){
+				console.log('부모 focus!');
+			});
+			$('input').focus(function(){
+				console.log('인풋 focus!');
+			});
+			// 포커스
+
+			$('.css_test img').bind({
+				mouseover : function(){
+					this.src = 'http://superkts.com/img/css/dog061.gif';
+				},
+				mouseout : function(){
+					this.src = 'http://superkts.com/img/css/dog060.gif';
+				},
+				click : function(){
+					$(this).animate({top:'-=70'}, 100, function(){
+						$(this).animate({top:'+=70'}, 100, function(){
+							this.src = 'http://superkts.com/img/css/dog021.gif';
+						});
+					});
+				}
+			});
+
+			//$('.css_test img').unbind('click');
+
+			$("#demo8 button").on("click mouseout", function() {
+				alert("이벤트 발생!");
+			});
+
+			$("#demo8 button").off("cick");
+
+		});
+
+
+
+		// 버블링
+			var doDep1 = function(event) {
+			   alert('Clicked dep1');
+			}
+			var doDep2 = function(event) {
+			   alert('Clicked dep2');
+			}
+			var doDep3 = function(event) {
+			   alert('Clicked dep3');
+			}
+
+			var doDep4 = function(event) {			
+			   alert('Clicked dep1');
+			}
+			var doDep5 = function(event) {
+				event.stopPropagation();
+			   alert('Clicked dep2');
+			}
+			var doDep6 = function(event) {
+			   event.stopPropagation();
+			   alert('Clicked dep3');
+			}
+			// 버블링
+
+		function onClickBtn(){ alert("클릭 !"); }
+		function onDblBtn(){ alert("더블클릭 !"); }
+		function onmouseMov(){ alert("마우스 움직이기 !"); }
+		function onmouseOut(){ alert("마우스 아웃 !"); }
+		function onmouseUp(){ alert("마우스 업 !");}
+		function onMsDown(){alert("마우스 다운 !");}
+		
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>접근성을 고려한 마우스/키보드 EVENT 기능</h1>
+			<div class="box-01">
+				<h2>xhtml 에서 사용할 수 있는 마우스 event 기능</h2>
+				<div class="desc">
+					<ol>
+						<li><strong>a 태그 : 유일한 클릭이벤트</strong></li>
+						<li>
+							<strong>대상:focus</strong>
+							마우스 기능을 대신하여 tab키로 접근 가능하도록 만드는 기능<br/>
+							+ <span>a태그가 있으면</span> focus 접근이 가능<br/>
+							+ jQuery에서는 focus이벤트를 a태그가 아닌 다른 대상에게 부여할 수 있음
+						</li>
+						<li>탭키로 작동할 수 있는 skip navigation</li>
+					</ol>
+				</div>
+			</div>
+			<div class="box-02">
+				<h2>html5에서 사용할 수 있는 event 기능</h2>
+				<div class="desc">
+					<ol>
+						<li>a 태그</li>
+						<li>대상:focus </li>
+						<li>대상:hover</li>
+						<li>이벤트의 기능이 다양하지 못하기 때문에 jQuery, javacript의 기능들을 활용한다.</li>
+					</ol>
+				</div>
+			</div>
+			<div class="box-03">
+				<h2>jQuery에서 사용할 수 있는 event 기능</h2>
+				<div class="box-03-1">
+					<h3>1.click</h3>
+					<p>대상을 클릭하기위해 사용하는 이벤트 기능</p>
+					<div class="desc">
+						$('#clickEvent').click(function(){
+							<br><br>
+							$(this).css({'backgroundColor':'lightblue'}).fadeTd(1000,'0.3');
+							<br><br>
+						});
+					</div>
+					<div id="clickEvent" class="box">
+						대상을 <strong>클릭</strong>하면 배경색상 변경
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>2.mouseover</h3>
+					<p>대상에 마우스를 올렸을때 기능을 구현하기위해 사용하는 이벤트 기능</p>
+					<div class="desc">
+						$('#mouseoverEvent').mouseover(function(){
+							<br><br>
+							$(this).animate({'color':'#f00'},500,liner);
+							<br><br>
+						});
+					</div>
+					<div id="mouseoverEvent" class="box">
+						대상에 <strong>mouseover</strong>하면 글자색상 변경
+					</div>
+				</div>	
+				
+				<div class="box-03-1">
+					<h3>3.mouseout</h3>
+					<p>대상에서 마우스를 뗐을때 기능을 구현하기위해 사용하는 이벤트 기능</p>
+					<div class="desc">
+						$('#mouseoutEvent').mouseout(function(){
+							<br><br>
+							$(this).animate({'borderRadius':'50%'},500,ease);
+							<br><br>
+						});
+					</div>
+					<div id="mouseoutEvent" class="box">
+						대상에 <strong>mouseout</strong>하면 border-radius 변경
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>4.mouseenter</h3>
+					<p>대상에 마우스를 올렸을때 기능을 구현하기위해 사용하는 이벤트 기능</p>
+					<div class="desc">
+						$('#mouseenterEvent').mouseenter(function(){
+							<br><br>
+							$(this).animate({'color':'#f00'},500,liner);
+							<br><br>
+						});
+					</div>
+					<div id="mouseenterEvent" class="box">
+						대상에 <strong>mouseenter</strong>하면 글자색상 변경
+					</div>
+				</div>
+
+				<div class="box-03-1">
+					<h3>5.mouseleave</h3>
+					<p>대상에서 마우스를 뗐을때 기능을 구현하기위해 사용하는 이벤트 기능</p>
+					<div class="desc">
+						$('#mouseleaveEvent').mouseleave(function(){
+							<br><br>
+							$(this).animate({'borderRadius':'50%'},500,ease);
+							<br><br>
+						});
+					</div>
+					<div id="mouseoutEvent" class="box">
+						대상에 <strong>mouseleave</strong>하면 border-radius 변경
+					</div>
+				</div>
+
+				<div class="dif">
+					<h2>mouseenter 과 mouseover 메서드의 차이</h2>
+					<!--
+					참고사이트
+					http://recoveryman.tistory.com/51
+					http://webclub.tistory.com/456 
+					-->
+					<div class="dif_desc overEvent">
+						<strong>mouseover는 직접 이벤트를 걸지않은 자식요소에 마우스 포인터가 와도 발생하지만, mouseenter 이벤트는 문서 객체의 안에 있는지 외부에 있는지만 따지기 때문에 이벤트가 한 번만 발생하게 됩니다.</strong>
+						<div class="desc">
+							<p>
+
+								<strong>html</strong><br>
+								&lt;div class="outer"&gt;<br>
+									&lt;div class="inner"&gt;&lt;/div&gt;<br>
+								&lt;/div&gt;
+							</p>
+							<p>
+								<strong>css</strong><br>
+								* {margin:0; padding:0;}<br>
+								a:link, a:visited {text-decoration:none; color:#fff;}<br>
+								a:hover, a:focus {color:#f00; text-decoration:underline;}<br>
+								li {list-style:none;}<br>
+								.wrapper {width:960px; margin:0 auto;}<br>
+								<br>
+								.outer {<br>
+								width: 200px;<br>
+								height: 200px;<br>
+								background: Orange;<br>
+								padding: 50px;<br>
+								margin: 10px;<br>
+								}<br>
+								<br>
+								.inner {<br>
+									width: 100%;<br>
+									height: 100%;<br>
+									background: Pink;<br>
+								}<br>
+							</p>
+							<p>
+								<strong>script</strong><br>
+								$('.outer')<br>
+								.mouseover(function(){<br>
+									$('.dif_desc').append('<p>마우스오버가 발생했습니다.</p>')<br>
+								})<br>
+								.mouseenter(function(){<br>
+									$('.dif_desc').append('<p>마우스엔터가 발생했습니다.</p>')<br>
+								});<br>
+							</p>
+						</div>
+						<div class="outer">
+							<div class="inner"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="dif">
+					<h2>mouseout 과 mouseleave 메서드의 차이</h2>
+					<div class="dif_desc2">
+						<strong>mouseout는 직접 이벤트를 걸지않은 자식요소에 마우스 포인터가 와도 발생하지만, mouseleave 이벤트는 문서 객체의 안에 있는지 외부에 있는지만 따지기 때문에 이벤트가 한 번만 발생하게 됩니다.</strong>
+						<div class="desc">
+							<p>
+								<strong>html</strong><br>
+								&lt;div class="outer2"&gt;<br>
+									&lt;div class="inner"&gt;&lt;/div&gt;<br>
+								&lt;/div&gt;
+							</p>
+							<p>
+								<strong>css</strong><br>
+								* {margin:0; padding:0;}<br>
+								a:link, a:visited {text-decoration:none; color:#fff;}<br>
+								a:hover, a:focus {color:#f00; text-decoration:underline;}<br>
+								li {list-style:none;}<br>
+								.wrapper {width:960px; margin:0 auto;}<br>
+								<br>
+								.outer2 {<br>
+								width: 200px;<br>
+								height: 200px;<br>
+								background: Orange;<br>
+								padding: 50px;<br>
+								margin: 10px;<br>
+								}<br>
+								<br>
+								.inner {<br>
+									width: 100%;<br>
+									height: 100%;<br>
+									background: Pink;<br>
+								}<br>
+							</p>
+							<p>
+								<strong>script</strong><br>
+								$('.outer2')<br>
+								.mouseover(function(){<br>
+									$('.dif_desc2').append('<p>마우스아웃이 발생했습니다.</p>')<br>
+								})<br>
+								.mouseenter(function(){<br>
+									$('.dif_desc2').append('<p>마우스리브가 발생했습니다.</p>')<br>
+								});<br>
+							</p>
+						</div>
+						<div class="outer2">
+							<div class="inner"></div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="box-03-1">
+					<h3>4.dblclick</h3>
+					<div class="desc">
+						$('#dblclickEvent').dblclick(function(){
+							<br><br>
+							alert('더블클릭!');
+							<br><br>
+						});
+					</div>
+					<div class="box">
+						대상에 <button id="dblclickEvent">더블클릭</button>하면 alert창 만들기
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>5.focus</h3>
+					<p>키보드 tab으로 대상에 접근할 수 있도록 만드는 기능</p>
+					<span>* a태그가 없어도 tab키로 대상에 접근할 수 있다!</span>
+					<div class="desc">
+						$('#focusEvent').focus(function(){
+							<br><br>
+							alert('focus!');
+							<br><br>
+						});
+					</div>
+					<div class="box">
+						대상에 <strong>focus</strong>하면 alert창 만들기<br/>
+						<button id="focusEvent">focus</button>
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>6.blur</h3>
+					<p>tab키로 대상을 벗어났을때 기능을 구현하기 위해 사용</p>
+					<div class="desc">
+						$('#blurEvent').blur(function(){
+							<br><br>
+							alert('focus!');
+							<br><br>
+						});
+					</div>
+					<div class="box">
+						대상에 <strong>blur(포커스가 흐려짐)</strong>하면 alert창 만들기<br/>
+						<button id="blurEvent">blur</button>
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>7.focusin</h3>
+					<p>키보드 tab으로 대상에 접근할 수 있도록 만드는 기능</p>
+					<div class="desc">
+						$('#focusinEvent').focusin(function(){
+							<br><br>
+							alert('focusin!');
+							<br><br>
+						});
+					</div>
+					<div class="box">
+						대상에 <strong>focusin</strong>하면 alert창 만들기<br/>
+						<button id="focusinEvent">focus</button>
+					</div>
+				</div>
+				
+				<div class="box-03-1">
+					<h3>7.focusout</h3>
+					<p>tab키로 대상을 벗어났을때 기능을 구현하기 위해 사용</p>
+					<div class="desc">
+						$('#focusoutEvent').focusin(function(){
+							<br><br>
+							alert('focusout!');
+							<br><br>
+						});
+					</div>
+					<div class="box">
+						대상에 <strong>focusout</strong>하면 alert창 만들기<br/>
+						<button id="focusoutEvent">focus</button>
+					</div>
+				</div>
+				
+
+				<div class="dif">
+					<h2>focus 과 focusin 메서드의 차이</h2>
+					<!--
+					참고사이트
+					http://ibrahimovic.tistory.com/13
+
+					https://webisfree.com/2016-06-15/[%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8]-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%EC%A0%9C%EA%B1%B0%EB%B0%A9%EB%B2%95-stoppropagation()
+					-->
+					<div class="dif_desc">
+						<strong>focusin, focusout는 직접 이벤트를 걸지않은 자식(또는 부모)요소에 tab이 와도 발생하지만(버블링 현상), focus, blur 이벤트는 문서 객체의 안에 있는지 외부에 있는지만 따지기 때문에 이벤트가 한 번만 발생하게 됩니다.(버블링 발생하지 않음)</strong>
+						<div class="desc">
+							<ul>
+								<li>1. 동일한 결과를 예상하고 싶을때 focusin과 focusout를 함께, focus와 blur를 함께 사용하자. </li>
+								<li>2. input에 포커스되거나 잃어버렸을때, 부모요소에서 리스너를 동작하고 싶다면 focusin과 focusout을 사용하자.</li>
+							</ul>
+							<p>
+								<strong>html</strong><br>
+
+								&lt;div class="parent"&gt;<br>
+									&lt;input type="text"&gt;<br>
+								&lt;/div&gt;<br>		
+							</p>
+							<p>
+								<strong>script</strong><br>
+								$('.parent').focusin(function(){<br>
+								&nbsp;&nbsp;console.log('부모 focusin!');<br>
+								});<br>
+								$('input').focusin(function(){<br>
+								&nbsp;&nbsp;console.log('인풋 focusin!');<br>
+								});<br>
+								$('.parent').focus(function(){<br>
+								&nbsp;&nbsp;console.log('부모 focus!');<br>
+								});<br>
+								$('input').focus(function(){<br>
+								&nbsp;&nbsp;console.log('인풋 focus!');<br>
+								});<br><br>
+							</p>
+							<div class="parent">
+								<input type="text">
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="bubling">
+					<h2>버블링 현상</h2>
+					<p>
+						이벤트 버블링은 보통 선택한 엘리먼트가 속해있는 부모요소에 의하여 발생한다.<br> 
+						예를들어 어떤 버튼을 클릭하려고 할때 그 버튼을 가지고 있는 부모 요소에 이미 클릭 이벤트가 존재할때,<br> 
+						선택한 요소와 더불어 의도하지 않았던 부모 요소의 이벤트도 함께 실행되는 문제점을 발생시킬 수 있을 것이다. <br><br>
+					</p>
+
+					<div class="dif_desc">
+						<div class="desc">
+							<p>
+								<strong>html</strong><br>
+
+								&lt;div class="dep1" onclick="doDep1(event);"&gt;<br />
+								   &nbsp;&nbsp;dep1<br />
+								   &nbsp;&nbsp;&lt;div class="dep2" onclick="doDep2(event);"&gt;<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dep2<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onclick="doDep3(event);"&gt;dep3&lt;/button&gt;<br />
+								   &nbsp;&nbsp;&lt;/div&gt;<br />
+								&lt;/div&gt; <br /><br />
+						
+							</p>
+							<p>
+								<strong>css</strong><br>
+								.dep1 {<br>
+								   width: 200px;<br>
+								   height: 200px;<br>
+								   display: block;<br>
+								   background-color: #dcdcdc;<br>
+								}<br>
+								.dep2 {<br>
+								   width: 100px;<br>
+								   height: 100px;<br>
+								   display: block;<br>
+								   margin: 3px auto;<br>
+								   background-color: #ececec;<br>
+								}<br>
+								button {<br>
+								   display: block;<br>
+								   margin: 0 auto;<br>
+								}<br>
+							</p>
+							<p>
+								<strong>script</strong><br>
+								&lt;script type="text/javascript"&gt;<br/>
+									var doDep1 = function(event) {<br/>
+									  &nbsp; &nbsp;alert('Clicked dep1');<br/>
+									}<br/>
+									var doDep2 = function(event) {<br/>
+									 &nbsp;&nbsp;  alert('Clicked dep2');<br/>
+									}<br/>
+									var doDep3 = function(event) {<br/>
+									   &nbsp;&nbsp;('Clicked dep3');<br/>
+									}<br/>
+									&lt;s/script&gt;<br/>
+							</p>
+
+							<div class="dep1" onclick="doDep1(event);">
+							   dep1
+							   <div class="dep2" onclick="doDep2(event);">
+								  dep2<br /><br />
+								  <button onclick="doDep3(event);">dep3</button>
+							   </div>
+							</div> 
+						</div>
+					</div>
+
+					<h3>해결 방법</h3>
+					<p>
+						<strong style="color:#f00;">stopPropagation()</strong> 함수를 사용하면 부모에 의한 이벤트 버블링을 효과적으로 매우 간단하게 막을 수 있게된다.
+					</p>
+
+					<div class="dif_desc">
+						<div class="desc">
+							<p>
+								<strong>html</strong><br>
+								&lt;div class="dep1" onclick="doDep4(event);"&gt;<br />
+								   &nbsp;&nbsp;dep1<br />
+								   &nbsp;&nbsp;&lt;div class="dep2" onclick="doDep5(event);"&gt;<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dep2<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onclick="doDep6(event);"&gt;dep3&lt;/button&gt;<br />
+								   &nbsp;&nbsp;&lt;/div&gt;<br />
+								&lt;/div&gt; <br /><br />
+							</p>
+							<p>
+								<strong>css</strong><br>
+								.dep1 {<br>
+								   width: 200px;<br>
+								   height: 200px;<br>
+								   display: block;<br>
+								   background-color: #dcdcdc;<br>
+								}<br>
+								.dep2 {<br>
+								   width: 100px;<br>
+								   height: 100px;<br>
+								   display: block;<br>
+								   margin: 3px auto;<br>
+								   background-color: #ececec;<br>
+								}<br>
+								button {<br>
+								   display: block;<br>
+								   margin: 0 auto;<br>
+								}<br>
+							</p>
+							<p>
+								<strong>script</strong><br>
+								&lt;script type="text/javascript"&gt;<br/>
+									var doDep4 = function(event) {<br/>
+									  &nbsp; &nbsp;alert('Clicked dep1');<br/>
+									}<br/>
+									var doDep5 = function(event) {<br/>
+									event.stopPropagation();<br/>
+									 &nbsp;&nbsp;  alert('Clicked dep2');<br/>
+									}<br/>
+									var doDep6 = function(event) {<br/>
+									event.stopPropagation();<br/>
+									 &nbsp;&nbsp;  event.stopPropagation();<br/>
+									   &nbsp;&nbsp;('Clicked dep3');<br/>
+									}<br/>
+									&lt;s/script&gt;<br/>
+							</p>
+
+							<div class="dep1" onclick="doDep4(event);">
+							   dep1
+							   <div class="dep2" onclick="doDep5(event);">
+								  dep2<br /><br />
+								  <button onclick="doDep6(event);">dep3</button>
+							   </div>
+							</div> 
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="jQuery_table">
+				<h2>마우스 이벤트 정리</h2>
+				<table>
+					<tr>
+						<th>마우스</th>
+						<th>키보드</th>
+					</tr>
+					<tr>
+						<td>click</td>
+						<td><!-- focus (tab으로 이동 후 enter) --></td>
+					</tr>
+					<tr>
+						<td>dblclick</td>
+						<td><!-- focus (tab으로 이동 후 enter) --></td>
+					</tr>
+					<tr>
+						<td>mouseover ↔ mouseout</td>
+						<td>focus ↔ blur</td>
+					</tr>
+					<tr>
+						<td>mouseenter↔ mouseleave</td>
+						<td>focusin ↔ focusout</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="script_desc">
+				
+				<div class="desc">
+					<h2>javascript에서 사용할 수 있는 마우스 event 기능</h2>
+					<p>
+						<strong>html</strong><br>
+						&lt;h3>onclick : 클릭할때 생기는 이벤트&lt;/h3&gt;<br/>
+						&lt;input id="clickBtn" type="button" value="클릭" onclick="onClickBtn();"/&gt;	<br/><br/>
+						&lt;h3>ondblclick : 더블클릭 할때 생기는 이벤트&lt;/h3&gt;<br/>
+						&lt;input id="dblBtn" type="button" value="더블클릭" ondblclick="onDblBtn();"/&gt;<br/><br/>
+						&lt;h3>onmousemove : 마우스가 움직일때 생기는 이벤트&lt;/h3&gt;<br/>
+						&lt;input id="mouseMov" type="button" value="마우스 움직이기" onmousemove="onmouseMov();"/&gt;<br/><br/>
+						&lt;h3>mouseout : 마우스가 바깥으로 나가면 생기는 이벤트&lt;/h3&gt;<br/>
+						&lt;input id="mouseOut" type="button" value="마우스 아웃" onmouseout="onmouseOut();"/&gt;<br/><br/>
+						&lt;h3>onmouseup : 1) 해당하는 값 누르기, 2) 해당하는 값에서 마우스를 놓을때 생기는 이벤트 &lt;/h3&gt;<br/>
+						&lt;input id="mouseUp" type="button" value="마우스 업" onmouseup="onmouseUp();"/&gt;<br/><br/>
+						&lt;h3>onmouseDown : 마우스 버튼을 누를 때 발생&lt;/h3&gt;<br/>
+						&lt;input id="mouseUp" type="button" value="마우스 다운" onmousedown="onMsDown();"/&gt;<br/><br/>
+					</p>
+					<p>
+						<strong>script</strong><br/>
+						&lt;script&gt;<br/>
+						function onClickBtn(){ alert("클릭 !"); }<br/>
+						function onDblBtn(){ alert("더블클릭 !"); }<br/>
+						function onmouseMov(){ alert("마우스 움직이기 !"); }<br/>
+						function onmouseOut(){ alert("마우스 아웃 !"); }<br/>
+						function onmouseUp(){ alert("마우스 업 !");}<br/>
+						function onMsDown(){alert("마우스 다운 !");}<br/>
+						&lt;/script&gt;
+					</p>
+				</div>
+				
+				<h3>onclick : 클릭할때 생기는 이벤트</h3>
+				<input id="clickBtn" type="button" value="클릭" onclick="onClickBtn();"/>				
+				<h3>ondblclick : 더블클릭 할때 생기는 이벤트</h3>
+				<input id="dblBtn" type="button" value="더블클릭" ondblclick="onDblBtn();"/>
+				<h3>onmousemove : 마우스가 움직일때 생기는 이벤트</h3>
+				<input id="mouseMov" type="button" value="마우스 움직이기" onmousemove="onmouseMov();"/>
+				<h3>mouseout : 마우스가 바깥으로 나가면 생기는 이벤트</h3>
+				<input id="mouseOut" type="button" value="마우스 아웃" onmouseout="onmouseOut();"/>
+				<h3>onmouseup : 1) 해당하는 값 누르기, 2) 해당하는 값에서 마우스를 놓을때 생기는 이벤트 </h3>
+				<input id="mouseUp" type="button" value="마우스 업" onmouseup="onmouseUp();"/>
+				<h3>onmouseDown : 마우스 버튼을 누를 때 발생</h3>
+				<input id="mouseUp" type="button" value="마우스 다운" onmousedown="onMsDown();"/>
+			</div>
+			
+			<div class="bind">
+				<h3>
+					1. 두가지 기능을 한꺼번에 묶을때 사용하는 기능<br>
+					2. 접근성을 고려한 마우스기능과 키보드 기능을 편리하게 묶어서 구현할 수 있다.<br>
+					3. 종류 : bind, on, one
+				</h3>
+				<div class="bind_in">
+					<h4>bind</h4>
+					<ul>
+						<li>bind는 정적인 페이지에서 기능을 묶을때 사용</li>
+						<li>해제속성 : unbind (바인드 끊기)</li>
+						<li>표준 브라우저에서 주로 사용 (jQuery 3.0버전에서는 사용되지 않는다.)</li>
+					</ul>
+					<div class="desc">
+						<p>
+							<strong>html</strong><br>
+							&lt;div class="css_test"&gt;<br>
+								&lt;img src="http://superkts.com/img/css/dog060.gif" /&gt;<br>
+								&lt;img src="http://superkts.com/img/css/dog060.gif" /&gt;<br>
+								&lt;img src="http://superkts.com/img/css/dog060.gif" /&gt;<br>
+								&lt;img src="http://superkts.com/img/css/dog060.gif" /&gt;<br>
+								&lt;img src="http://superkts.com/img/css/dog060.gif" /&gt;<br>
+							&lt;/div&gt;
+						
+						</p>
+						<p>
+							<strong>css</strong><br>
+							.css_test {<br>
+								&nbsp;&nbsp;border-radius : 5px;<br>
+								&nbsp;&nbsp;border : 3px solid gray;<br>
+								&nbsp;&nbsp;padding : 20px;<br>
+								&nbsp;&nbsp;text-align : center;<br>
+							}<br>
+							.css_test img {<br>
+								&nbsp;&nbsp;cursor : pointer;<br>
+							}
+						</p>
+						<p>
+							<strong>script</strong><br>
+							&lt;script type="text/javascript"&gt;<br/>
+								&nbsp;&nbsp;$('.css_test img').<span style="color:#f00; font-weight:bold;">bind</span>({<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue; font-weight:bold;">mouseover</span> : function(){<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.src = 'http://superkts.com/img/css/dog061.gif';<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;},<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue; font-weight:bold;">mouseout</span> : function(){<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.src = 'http://superkts.com/img/css/dog060.gif';<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;},<br/>
+							&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue; font-weight:bold;">click</span> : function(){<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).animate({top:'-=70'}, 100, function(){<br/>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).animate({top:'+=70'}, 100, function(){<br/>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.src = 'http://superkts.com/img/css/dog021.gif';<br/>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+									&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+								&nbsp;&nbsp;});<br/>
+							&lt;/script&gt;<br/>
+						</p>
+						
+
+					</div>
+					
+					<div class="css_test">
+						3개의 이벤트 동시 바인딩<br>
+						마우스 오버, 아웃, 클릭<br>
+						<img src="http://superkts.com/img/css/dog060.gif" />
+						<img src="http://superkts.com/img/css/dog060.gif" />
+						<img src="http://superkts.com/img/css/dog060.gif" />
+						<img src="http://superkts.com/img/css/dog060.gif" />
+						<img src="http://superkts.com/img/css/dog060.gif" />
+					</div>
+					
+					<p>
+						<strong>해제하는 방법</strong><br>
+						unbind를 사용해 빼고싶은 이벤트기능을 해제할 수 있다.<br>
+						$('.css_test img').unbind('click');
+					</p>
+					
+				</div>
+				
+				<div class="on_in">
+					<h4>on</h4>
+					<ul>
+						<li>on()은 jQuery 1.7부터 bind(), delegate(), live()를 대체하는 메서드로 이벤트 핸들러 바인딩에 필요한 기존 메서드의 모든 기능을 제공한다. jQuery는 앞의 세 메서드 대신 on()을 사용할 것을 권장하고 있다.</li>
+						<li>구형, 표준 브라우저에서 사용할 수 있다.</li>
+						<li>해제속성 : off</li>
+						
+					</ul>
+					<div class="desc">
+						<div>
+							<p>.on( events [, selector] [, data], handler( eventObject ) )</p>
+							events: 공백으로 구분된 하나 이상의 이벤트 타입과 옵션인 네임스페이스. "click", "keydown.myPlugin", ".myPlugin" 등이 있음<br>
+							selector: 이벤트가 발생할 요소들의 자손을 찾는 선택자. 선택자가 null 이거나 생략됐다면 이벤트는 선택된 요소에 한해서 반응한다.<br>
+							data: 이벤트가 발생할 때 핸들러에 전달할 데이터<br>
+							handler(eventObject): 이벤트가 발생되면 실행될 기능. false를 반환하는 함수라면 간단하게 false 를 직접 인자로 하면 된다.<br
+						</div>
+						<p>
+							<strong>html</strong><br>
+							&lt;div id="demo8"&gt;<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&lt;button>눌러보세요&lt;/button&gt;<br>
+							&lt;/div&gt;<br>
+						</p>
+						<p>
+							<strong>script</strong><br>
+							  $("#demo8 button").on("click mouseout", function() {<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;alert("이벤트 발생!");<br>
+								});<br>
+						</p>
+						
+						
+
+					</div>
+					
+					<div id="demo8">
+						<button>눌러보세요</button>
+					</div>
+					
+					<p>
+						<strong>해제하는 방법</strong><br>
+						unbind를 사용해 빼고싶은 이벤트기능을 해제할 수 있다.<br>
+						$('.css_test img').unbind('click');
+					</p>
+					
+				</div>
+			</div>
+			
+			
+			
+		</div>
+	</body>
+</html>
+
+<!--
+버블링 참고 url
+https://webisfree.com/2016-06-15/[%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8]-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%EC%A0%9C%EA%B1%B0%EB%B0%A9%EB%B2%95-stoppropagation()
+
+
+바인딩  참고 url
+http://findfun.tistory.com/327
+http://superkts.com/jquery/bind
+
+on 참고 url
+http://noritersand.tistory.com/218
+-->
