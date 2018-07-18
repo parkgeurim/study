@@ -2,6 +2,10 @@ https://calyfactory.github.io/%EC%A0%9C%EC%9D%B4%EC%8A%A8%ED%8C%8C%EC%8B%B1/
 
 http://zeddios.tistory.com/153
 
+https://git-scm.com/download/win
+
+[TortoiseGit 다운로드 링크](https://tortoisegit.org/download/) 
+
 
 
 # json
