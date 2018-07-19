@@ -36,12 +36,16 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
 
 
 
+
+
 #### Ajax의 장점
 
 - 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 일부분만을 갱신할 수 있습니다.
 - 웹 페이지가 로드된 후에 서버로 데이터 요청을 보낼 수 있습니다.
 - 웹 페이지가 로드된 후에 서버로부터 데이터를 받을 수 있습니다.
 - 백그라운드 영역에서 서버로 데이터를 보낼 수 있습니다.
+
+
 
 
 
@@ -75,19 +79,19 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
 
      예)
 
-  ​	$.post(                  
-
-  ​		"testProc.jsp",                 
-
-  ​		 {                      	
-
-  ​			'mode' : $("#mode").val(),                      
-
-  ​			'contents' 	: **encodeURIComponent(**"한글테스트"**)**                      
-
-  ​		}                
-
-  ​	  ); 
+  		$.post(                  
+	
+  			"testProc.jsp",                 
+	
+  			 {                      	
+	
+  				'mode' : $("#mode").val(),                      
+	
+  				'contents' 	: **encodeURIComponent(**"한글테스트"**)**                      
+	
+  			}                
+	
+  		  ); 
 
   
 
@@ -135,8 +139,9 @@ $(function(){
 });
 </div>
 ```
-```script
-	$(function(){
+```javascript
+<script>
+$(function(){
 
 		$("#button1").click(function(){
 			$.ajax({ 
@@ -153,9 +158,15 @@ $(function(){
 		});
 
 	});
+</script>
 ```
 
 
+
+```javascript
+
+
+```
 
 
 
