@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<smartphone>
+	<company>
+		<apple>
+			<model>iPhone</model>
+			<os>ios</os>
+			<display>5.5inch</display>
+		</apple>
+		<samsung>
+			<model>Galaxy Note</model>
+			<os>Android</os>
+			<display>5.7inch</display>
+		</samsung>
+		<lg>
+			<model>v-series</model>
+			<os>Android</os>
+			<display>5.4inch</display>
+		</lg>
+	</company>
+</smartphone>

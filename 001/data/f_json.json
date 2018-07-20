@@ -1,0 +1,10 @@
+{
+	"smartphone":{
+		"company":
+					[ 
+						{"model":"iPhone", "os":"ios", "display":"5.5inch"},
+						{"model":"GalaxyNote", "os":"Android", "display":"5.7inch"},
+						{"model":"v-series", "os":"Android", "display":"5.4inch"}
+					]
+				}
+}

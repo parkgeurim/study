@@ -1,0 +1,11 @@
+{
+	"smartphone":
+		{
+			"apple":
+				{
+					"model":"iPhoneX",
+					"os":"ios",
+					"display":"5.5inch"
+				}
+		}
+}

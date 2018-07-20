@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<smartphone>
+	<apple>
+		<model>iPhoneX</model>
+		<os>ios</os>
+		<display>5.5inch</display>
+		<color>red</color>
+	</apple>
+</smartphone>
