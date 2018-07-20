@@ -80,17 +80,17 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
      예)
 
   		$.post(                  
-	
+		
   			"testProc.jsp",                 
-	
+		
   			 {                      	
-	
+		
   				'mode' : $("#mode").val(),                      
-	
+		
   				'contents' 	: **encodeURIComponent(**"한글테스트"**)**                      
-	
+		
   			}                
-	
+		
   		  ); 
 
   
@@ -163,21 +163,36 @@ $(function(){
 
 
 
-```javascript
-
+```html
+<p>
+    <input type="button" value="html 파일 출력" id="button2"/>
+</p>
 
 ```
+
+
+
+#### 주의사항
+
+
+
+##### ※경로를 연결할때 공백처리 주의!
+
+​		나쁜예)  data / a.text.txt
+		좋은예)  data/a.text.txt  공백없이 연결하기!
+
+
 
 
 
 
 # json
 
- json이란 무엇일까?
+ #### json이란 무엇일까?
 
 json은 JavaScript Object Notation으로 데이터를 주고받을때 사용되는 포맷 중 하나이다. 본래는 자바스크립트 언어로부터 파생되어 자바스크립트의 구문 형식을 따르지만 언어 독립형 데이터 포맷이다. 즉 프로그래밍 언어나 플랫폼에 독립적이므로, C, C++, C#, JAVA, PYTHON 등 여러 프로그래밍 언어에서 사용 할 수 있다.
 
-JSON 포맷은 [RFC 7159](https://tools.ietf.org/html/rfc7159)에 기술되어있다.
+
 
 json은 key:value 타입으로 데이터를 표현하며, Object와 Array가 있다.
 
@@ -189,7 +204,9 @@ object는 key/value로 표현되고 {}중괄호로 시작과 끝을 나타낸다
 
 { 
 
-​	"key1": "value1", "key2": "value2" 
+​	"key1": "value1", 
+
+​	"key2": "value2" 
 
 } 
 
@@ -205,7 +222,7 @@ array는 []대괄호로 구분되고 각 요소는 기본 자료형이나 배열
 
 ​	"value1",
 
-​	 "value2", 
+​	"value2", 
 
 ​	"value3" 
 
@@ -221,7 +238,7 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 ​	"name": "hello!", 
 
-​	"data": {
+​	"data": [
 
 ​		 "name": "jspiner",
 
@@ -229,7 +246,7 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 ​		"birth": 1991
 
-​	 }, 
+​	 ], 
 
 ​	"friends": [ 
 
@@ -273,7 +290,68 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
+예제) 버튼을 클릭했을때 json에 담겨있는 컨텐츠 가져오기
+
+```javascript
+<script>
+    $(function(){
+		$("#jsonBtn").click(function(){
+			$.ajax({
+				url:"data/e_json.json",
+				type:"get",
+				dataType:"json",
+				success:function( json ){
+					// 01) json 문서에 담겨있는 내용 추출하기
+					//		중요!) json 방식은 연관배열처럼 호출
+					//					연관배열 = box.a, box.b
+					var model = json.smartphone.apple.model;
+					var os = json.smartphone.apple.os;
+					var display = json.smartphone.apple.display;
+
+					// 02) 추출한 데이터 태그에 담아주기 
+					var ol = $("<ol>");
+					var li1 = $("<li>").html( model );
+					var li2 = $("<li>").html( os );
+					var li3 = $("<li>").html( display );
+
+					// 03) ol태그에 li태그들 연결하기
+					ol.append(li1).append(li2).append(li3);
+
+					// 04) 나열된 값들 결과창에 출력하기
+						$("#result").append( ol );
+
+				},error:function(){
+						alert("에러!");
+				}
+			});
+		});
+	});
+
+    
+</script>
+```
+
+
+
+
+
+```html
+p>
+	<input type="button" value="json파일 요청하기" id="jsonBtn"/>
+</p>
+```
+
+
+
+
+
+
+
 이렇게 데이터를 표현하면 프로그래밍 언어와 플랫폼에 독립적이기 때문에 서로 다른 시스템 간에 통신을 하기에 용의합니다. 
+
+
+
+
 
 
 
