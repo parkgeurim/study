@@ -305,13 +305,13 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
-
+date/test.json
 
 ```json
 {
-	"hackers":
+	"smartphone":
 		{
-			"publisher":
+			"apple":
 				{
 					"model":"iPhoneX",
 					"os":"ios",
@@ -330,28 +330,27 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
     $(function(){
 		$("#jsonBtn").click(function(){
 			$.ajax({
-				url:"data/e_json.json",
+				url:"data/test.json",
 				type:"get",
 				dataType:"json",
 				success:function( json ){
-					// 01) json 문서에 담겨있는 내용 추출하기
-					//		중요!) json 방식은 연관배열처럼 호출
-					//					연관배열 = box.a, box.b
+					//		json 방식은 연관배열처럼 호출
+					//			연관배열 = box.a, box.b
 					var model = json.smartphone.apple.model;
 					var os = json.smartphone.apple.os;
 					var display = json.smartphone.apple.display;
 
-					// 02) 추출한 데이터 태그에 담아주기 
-					var ol = $("<ol>");
+					// 가져온 데이터 태그에 담아주기 
+					var ul = $("<ul>");
 					var li1 = $("<li>").html( model );
 					var li2 = $("<li>").html( os );
 					var li3 = $("<li>").html( display );
 
-					// 03) ol태그에 li태그들 연결하기
-					ol.append(li1).append(li2).append(li3);
+					// ul태그에 li태그들 연결하기
+					ul.append(li1).append(li2).append(li3);
 
-					// 04) 나열된 값들 결과창에 출력하기
-						$("#result").append( ol );
+					// 나열된 값들 결과창에 출력하기
+						$("#result").append( ul );
 
 				},error:function(){
 						alert("에러!");
@@ -366,13 +365,13 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
-
-
+```html
 <p>
 	<input type="button" value="json파일 요청하기" id="jsonBtn"/>
 </p>
-
-
+<div id="result">
+</div>
+```
 
 
 
