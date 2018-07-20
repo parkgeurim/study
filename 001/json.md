@@ -118,7 +118,7 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
 
 
 ```html
-<div>
+
    
 $(function(){
 
@@ -137,7 +137,7 @@ $(function(){
 	});
 
 });
-</div>
+
 ```
 ```javascript
 <script>
@@ -179,7 +179,8 @@ $(function(){
 ##### ※경로를 연결할때 공백처리 주의!
 
 ​		나쁜예)  data / a.text.txt
-		좋은예)  data/a.text.txt  공백없이 연결하기!
+
+​		좋은예)  data/a.text.txt  공백없이 연결하기!
 
 
 
@@ -198,7 +199,7 @@ json은 key:value 타입으로 데이터를 표현하며, Object와 Array가 있
 
 
 
-\###Object
+### Object
 
 object는 key/value로 표현되고 {}중괄호로 시작과 끝을 나타낸다. 
 
@@ -212,7 +213,7 @@ object는 key/value로 표현되고 {}중괄호로 시작과 끝을 나타낸다
 
 
 
-###Array 
+### Array 
 
 array는 []대괄호로 구분되고 각 요소는 기본 자료형이나 배열, 객체가 될 수 있다. 
 
@@ -290,7 +291,39 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
+이렇게 데이터를 표현하면 프로그래밍 언어와 플랫폼에 독립적이기 때문에 서로 다른 시스템 간에 통신을 하기에 용의합니다. 
+
+
+
+
+
+
+
+
+
 예제) 버튼을 클릭했을때 json에 담겨있는 컨텐츠 가져오기
+
+
+
+
+
+```json
+{
+	"hackers":
+		{
+			"publisher":
+				{
+					"model":"iPhoneX",
+					"os":"ios",
+					"display":"5.5inch"
+				}
+		}
+}
+```
+
+
+
+
 
 ```javascript
 <script>
@@ -336,18 +369,12 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 ```html
-p>
+<p>
 	<input type="button" value="json파일 요청하기" id="jsonBtn"/>
 </p>
 ```
 
 
-
-
-
-
-
-이렇게 데이터를 표현하면 프로그래밍 언어와 플랫폼에 독립적이기 때문에 서로 다른 시스템 간에 통신을 하기에 용의합니다. 
 
 
 
