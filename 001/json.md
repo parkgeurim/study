@@ -8,6 +8,10 @@ ajax :
 
  http://tcpschool.com/ajax/ajax_intro_basic
 
+xml : 
+
+http://usbs.tistory.com/entry/XML-JSON-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D
+
 
 
 # ajax
@@ -73,7 +77,7 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
 
   ajax 자체가 utf-8로 인코딩하여 보내기 때문에 euc-kr 페이지 내에서 한글이 깨지는 문제가 발생할 수 있다
 
-  -> **해결** : 
+  ->  **해결** : 
 
   1. 넘길때는 **encodeURIComponent** 함수를 사용한다. 
 
@@ -115,30 +119,6 @@ Ajax는 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 
 
 #### **기본문법**		
 
-
-
-```html
-
-   
-$(function(){
-
-	$("#button1").click(function(){
-		$.ajax({ 
-    		url:"data/a.text.txt", <span class="blue">//파일을 연결하는 주소</span>
-    		type:"get", <span class="blue">// post 또는 get</span>
-   		 dataType:"text", <span class="blue">// 파일의 종류</span>
-			success:function( text ){
-				$("#result").html( text );
-			}, error:function(){
-   				 alert("에러, 다시 확인하고 연결하기");	<span class="blue">// 데이터를 가져오기 실패했을때의 기능</span>
-			} 
-			
-		});
-	});
-
-});
-
-```
 ```javascript
 <script>
 $(function(){
@@ -295,7 +275,11 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
+### 파싱
 
+json에서는 html에서 사용하는 태그를 사용하지 않기때문에 브라우저가 인식하기어렵다.
+
+그래서 데이터를 분해하고 다시 재설정하는 파싱이라는 작업이 필요하다.
 
 
 
@@ -372,6 +356,94 @@ date/test.json
 <div id="result">
 </div>
 ```
+
+
+
+
+
+
+
+# xml
+
+- HTML과 같이 XML은 *태그*('<'와 >'등의 꺽쇠괄호)와 *속성*(`이름="값"`형태)을 이용한다. HTML이 각 태그와 속성의 의미가 무엇이고, 태그들 가운데의 텍스트가 어떻게 브라우저에 보일것인지를 기술하는 반면에, XML은 태그를 데이타들의 분리자로 사용할 뿐만 아니라 데이타에 대한 해석을 완전히 그것을 읽는 응용 프로그램에 맡긴다.  
+
+- xml문서는 html에서 사용하는 태그를 하나도 사용하지 않기 때문에 브라우저에서 인식하기가 매우 어렵다.
+
+- xml문서에서 태그를 분해하고 다시 재설정 하는 "파싱" 이라는 작업이 필요하다.
+
+
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<smartphone>
+	<apple>
+		<model>iPhoneX</model>
+		<os>ios</os>
+		<display>5.5inch</display>
+		<color>red</color>
+	</apple>
+</smartphone>
+```
+
+
+
+```javascript
+  <script>
+	$(function(){
+		$("#xmlBtn").click(function(){
+			$.ajax({
+				url:"data/c_xml.xml",
+				type:"get",
+				dataType:"xml",
+				success:function( xml ){
+					/*
+					 xml이 가지고 있는 태그들은 제외하고, 글자( 내용 )만 추출하기
+						내용물 분해	, 분해된 내용 변수에 담기
+					*/
+					var model = $( xml ).find("model").text();
+					var os = $( xml ).find("os").text();		
+					var display = $( xml ).find("display").text();
+
+					// html 에서 인식할 수 있도록 태그에 담기!
+
+					var ol = $("<ol>");
+					var li1 = $("<li>").html( model );
+					var li2 = $("<li>").html( os );
+					var li3 = $("<li>").html( display );
+
+					// 만들어진 ol태그와 li태그들 연결하기
+					ol.append(li1).append(li2).append(li3);
+
+					//  result 결과창에 출력
+					$("#result").append( ol );
+					
+				
+				},error:function(){
+					alert("에러");
+				}
+			});
+		});
+	});
+  </script>
+```
+
+
+
+```html
+<p>
+    <input type="button" value="xml파일 요청하기" id="xmlBtn"/>
+</p>
+<div id="result">
+</div>
+```
+
+
+
+
+
+
+
+
 
 
 
