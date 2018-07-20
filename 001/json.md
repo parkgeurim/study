@@ -368,11 +368,9 @@ Object와 Array를 함께 섞어 다양한 데이터를 표현 할 수 있다.
 
 
 
-```html
 <p>
 	<input type="button" value="json파일 요청하기" id="jsonBtn"/>
 </p>
-```
 
 
 
