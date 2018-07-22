@@ -1,17 +1,3 @@
-json :
-
-https://calyfactory.github.io/%EC%A0%9C%EC%9D%B4%EC%8A%A8%ED%8C%8C%EC%8B%B1/
-
-http://zeddios.tistory.com/153
-
-ajax :
-
- http://tcpschool.com/ajax/ajax_intro_basic
-
-xml : 
-
-http://usbs.tistory.com/entry/XML-JSON-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D
-
 
 
 # Ajax
@@ -42,7 +28,6 @@ http://usbs.tistory.com/entry/XML-JSON-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B9%84%EA%
 
 - 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 일부분만을 갱신할 수 있습니다.
 - 웹 페이지가 로드된 후에 서버로 데이터 요청을 보낼 수 있습니다.
-- 웹 페이지가 로드된 후에 서버로부터 데이터를 받을 수 있습니다.
 - 백그라운드 영역에서 서버로 데이터를 보낼 수 있습니다.
 
 
@@ -131,7 +116,7 @@ $(function(){
 				success:function( text ){
 					$("#result").html( text );
 				}, error:function(){
-					alert("에러, 다시 확인하고 연결하기");	// 데이터를 가져오기 실패했을때의 기능
+					alert("에러");	// 데이터를 가져오기 실패했을때의 기능
 				} 
 				
 			});
@@ -374,11 +359,15 @@ date/test.json
 
 
 
+![](C:\Users\Administrator\Downloads\study-master\study-master\001\img\01.png)
 
 
 
 
 
+
+
+![](C:\Users\Administrator\Downloads\study-master\study-master\001\img\02.png)
 
 
 
@@ -413,7 +402,7 @@ date/test.json
 	$(function(){
 		$("#xmlBtn").click(function(){
 			$.ajax({
-				url:"data/c_xml.xml",
+				url:"data/test02.xml",
 				type:"get",
 				dataType:"xml",
 				success:function( xml ){
@@ -428,9 +417,9 @@ date/test.json
 					// html 에서 인식할 수 있도록 태그에 담기!
 
 					var ol = $("<ol>");
-					var li1 = $("<li>").html( model );
-					var li2 = $("<li>").html( os );
-					var li3 = $("<li>").html( display );
+					var li1 = $("<li>").html("model : "+model);
+					var li2 = $("<li>").html("os : "+os);
+					var li3 = $("<li>").html("display : "+display);
 
 					// 만들어진 ol태그와 li태그들 연결하기
 					ol.append(li1).append(li2).append(li3);
@@ -464,27 +453,23 @@ date/test.json
 
 
 
-## xml / json 비교
-
-
-
-#### XML의 장점
-
-- 작성하기가 간편하다(tag구조) 
-- 정보들을 한눈에 보기 쉽다.
-- 
-
-#### XML의 단점
-
-- 태그를 사용하기 때문에 문서의 양이 필요이상으로 많다.
-- 배열형식이나 반복구조의 경우 불필요한 데이터가 계속 해서 나타난다. 
-- 위의 이유로 이로인해 파싱이 힘들어지고 속도는 느려진다. 
+![03](C:\Users\Administrator\Downloads\study-master\study-master\001\img\03.png)
 
 
 
 
 
 
+
+![04](C:\Users\Administrator\Downloads\study-master\study-master\001\img\04.png)
+
+
+
+
+
+
+
+## json / xml  비교
 
 
 
@@ -505,6 +490,43 @@ date/test.json
 - 아무래도 적은규격의 데이터 전송에 적합한 방식이기떄문에 XML보다는 빠르지만 대용량급의 데이터 송수신엔 부적합 모습도 있다. 
 
 
+
+#### XML의 장점
+
+- 작성하기가 간편하다(tag구조) 
+- 정보들을 한눈에 보기 쉽다.
+
+  
+
+#### XML의 단점
+
+- 태그를 사용하기 때문에 문서의 양이 필요이상으로 많다.
+- 배열형식이나 반복구조의 경우 불필요한 데이터가 계속 해서 나타난다. 
+- 위의 이유로 이로인해 파싱이 힘들어지고 속도는 느려진다. 
+
+
+
+
+
+
+
+
+
+출처
+
+json :
+
+https://calyfactory.github.io/%EC%A0%9C%EC%9D%B4%EC%8A%A8%ED%8C%8C%EC%8B%B1/
+
+http://zeddios.tistory.com/153
+
+ajax :
+
+ http://tcpschool.com/ajax/ajax_intro_basic
+
+xml : 
+
+http://usbs.tistory.com/entry/XML-JSON-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D
 
 
 
