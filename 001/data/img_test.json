@@ -1,0 +1,21 @@
+{"datalist":
+	{"list":[
+			{
+				"h3":"interior_snapShot#1", 
+				"img":"<img src='img/bu1.jpg' alt='이미지1' />"
+			},
+			{
+				"h3":"interior_snapShot#2", 
+				"img":"<img src='img/bu2.jpg' alt='이미지2' />"
+			},
+			{
+				"h3":"interior_snapShot#3", 
+				"img":"<img src='img/bu3.jpg' alt='이미지3' />"
+			},
+			{
+				"h3":"interior_snapShot#4", 
+				"img":"<img src='img/bu4.jpg' alt='이미지4' />"
+			}
+		]
+	}
+}
