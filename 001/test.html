@@ -6,11 +6,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <style>
 		*{margin:0; padding:0;}
-		#wrap{width:700px; margin:50px;}
-		#window{ width:100%; height:500px; border:5px solid #ccc; overflow:hidden;}
+		#wrap{width:513px; margin:0 auto;}
+		#window{ width:100%; height:500px;}
 
-		a{ text-decoration:none; display:inline-block; width:80px; height:30px; background-color:#aaa; 
+		a{ text-decoration:none; display:inline-block; width:20%; height:30px; background-color:#aaa; 
 		margin:20px 0; line-height:30px; color:#fff; text-align:center;}
+		a:hover {background-color:#929;}
   </style>
   <script>
 	$(function(){
@@ -54,10 +55,12 @@
  </head>
  <body>
 	<div id="wrap">
-		<a href="#data0" title="img">데이터0</a>
-		<a href="#data1" title="img">데이터1</a>
-		<a href="#data2" title="img">데이터2</a>
-		<a href="#data3" title="img">데이터3</a>
+		<div class="nav">
+			<a href="#data0" title="img">배너0</a>
+			<a href="#data1" title="img">배너1</a>
+			<a href="#data2" title="img">배너2</a>
+			<a href="#data3" title="img">배너3</a>
+		</div>
 		<div id="window"></div>
 	</div>
  </body>
