@@ -289,7 +289,7 @@ json에서는 html에서 사용하는 태그를 사용하지 않기때문에 브
 
 
 
-date/test.json
+data/test.json
 
 ```json
 {
