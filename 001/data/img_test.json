@@ -1,20 +1,20 @@
 {"datalist":
 	{"list":[
 			{
-				"h3":"interior_snapShot#1", 
-				"img":"<img src='img/bu1.jpg' alt='이미지1' />"
+				"h3":"Banner_image#1", 
+				"img":"<img src='img/aa1.jpg' alt='배너이미지1' />"
 			},
 			{
-				"h3":"interior_snapShot#2", 
-				"img":"<img src='img/bu2.jpg' alt='이미지2' />"
+				"h3":"Banner_image#2", 
+				"img":"<img src='img/aa2.jpg' alt='배너이미지2' />"
 			},
 			{
-				"h3":"interior_snapShot#3", 
-				"img":"<img src='img/bu3.jpg' alt='이미지3' />"
+				"h3":"Banner_image#3", 
+				"img":"<img src='img/aa3.jpg' alt='배너이미지3' />"
 			},
 			{
-				"h3":"interior_snapShot#4", 
-				"img":"<img src='img/bu4.jpg' alt='이미지4' />"
+				"h3":"Banner_image#4", 
+				"img":"<img src='img/aa4.jpg' alt='배너이미지4' />"
 			}
 		]
 	}
