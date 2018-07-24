@@ -20,10 +20,6 @@
 
 
 
-
-
-
-
 #### Ajax의 장점
 
 - 웹 페이지 전체를 다시 로딩하지 않고도, 웹 페이지의 일부분만을 갱신할 수 있습니다.
@@ -134,10 +130,6 @@ $(function(){
 </p>
 
 ```
-
-
-
-
 
 
 
@@ -287,7 +279,7 @@ json에서는 html에서 사용하는 태그를 사용하지 않기때문에 브
 
 ### Ajax를 활용하여 json파일 불러오기!
 
-
+예제1) 텍스트 파일 불러오기
 
 data/test.json
 
@@ -359,19 +351,89 @@ data/test.json
 
 
 
-![](C:\Users\Administrator\Downloads\study-master\study-master\001\img\01.png)
+##### 예제1 결과보기 > http://whd9425.cafe24.com/geu/test01_json.html
+
+
+
+예제2 ) 이미지 불러오기
+
+```json
+{"datalist":
+	{"list":[
+			{
+				"h3":"Banner_image#1", 
+				"img":"<img src='img/aa1.jpg' alt='배너이미지1' />"
+			},
+			{
+				"h3":"Banner_image#2", 
+				"img":"<img src='img/aa2.jpg' alt='배너이미지2' />"
+			},
+			{
+				"h3":"Banner_image#3", 
+				"img":"<img src='img/aa3.jpg' alt='배너이미지3' />"
+			},
+			{
+				"h3":"Banner_image#4", 
+				"img":"<img src='img/aa4.jpg' alt='배너이미지4' />"
+			}
+		]
+	}
+}
+```
+
+```javascript
+$(function(){
+		$("a").click(function(){
+			var num = $(this).attr("href").substring(5,6);
+			// alert( num );		
+
+			$.ajax({
+				url:"data/img_test.json",
+				type:"get",
+				dataType:"json",
+				success:function( json ){
+					var menu = json.datalist.list;
+
+					var h3 = menu[num].h3;
+					var img = menu[num].img;
+
+					var hh3 = $("<h3>").html(h3);
+					var pp = $("<p>").html(img);
+				
+
+					$("#window").empty();
+					$("#window").append(hh3).append(pp);
+					
+
+				},error:function(){
+						alert("에러!");
+				}
+			});
+		});
+	});
+```
+
+
+
+```html
+<div id="wrap">
+		<div class="nav">
+			<a href="#data0" title="img">배너0</a>
+			<a href="#data1" title="img">배너1</a>
+			<a href="#data2" title="img">배너2</a>
+			<a href="#data3" title="img">배너3</a>
+		</div>
+		<div id="window"></div>
+	</div>
+```
+
+
+
+**예제 2) 결과보기 > http://whd9425.cafe24.com/geu/test.html**
 
 
 
 
-
-
-
-![](C:\Users\Administrator\Downloads\study-master\study-master\001\img\02.png)
-
-
-
-http://whd9425.cafe24.com/geu/test.html
 
 # xml
 
@@ -449,21 +511,7 @@ http://whd9425.cafe24.com/geu/test.html
 
 
 
-
-
-
-
-![03](C:\Users\Administrator\Downloads\study-master\study-master\001\img\03.png)
-
-
-
-
-
-
-
-![04](C:\Users\Administrator\Downloads\study-master\study-master\001\img\04.png)
-
-
+**결과보기 > http://whd9425.cafe24.com/geu/test_xml.html**
 
 
 
