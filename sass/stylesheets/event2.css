@@ -1,0 +1,112 @@
+@charset "UTF-8";
+/*
+https://heropy.blog/2018/01/31/sass/
+
+cd D:\sass
+d:
+scss --watch stylesheets:stylesheet/compiled
+
+*/
+/* 조건이 참일 때 구문 */
+/* 조건이 참일 때 구문 */
+/* 조건1이 참일 때 구문 */
+body {
+  width: 1000px;
+  margin: 0 auto;
+  color: green; }
+
+.container {
+  width: 1000px; }
+  .container section {
+    float: left;
+    width: 30%;
+    height: 300px;
+    margin-left: 5%; }
+    .container section:first-child {
+      margin-left: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #F0AD4E;
+      line-height: 5em; }
+
+section:nth-child(2) {
+  font-size: 18px;
+  font-weight: 700;
+  color: #00B3EE;
+  line-height: 2em; }
+section:nth-child(3) {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7A43B6;
+  line-height: 1em; }
+
+/*
+인수(Arguments)
+Mixin은 함수(Functions)처럼 인수(Arguments)를 가질 수 있다.
+매개변수(Parameters)란 변수의 한 종류로, 제공되는 여러 데이터 중 하나를 가리키기 위해 사용된다.
+제공되는 여러 데이터들을 전달인수(Arguments) 라고 부른다.
+
+
+// SCSS
+@mixin 믹스인이름($매개변수) {
+  스타일;
+}
+@include 믹스인이름(인수);
+
+// Sass
+=믹스인이름($매개변수)
+  스타일
+
++믹스인이름(인수)
+
+*/
+section:nth-child(2) {
+  border: 2px dashed orange;
+  box-sizing: border-box; }
+
+section:nth-child(3) {
+  border: 4px dotted green;
+  box-sizing: border-box; }
+
+/*
+키워드 인수(Keyword Arguments)
+
+Mixin에 전달할 인수를 입력할 때 명시적으로 키워드(변수)를 입력하여 작성할 수 있다.
+별도의 인수 입력 순서를 필요로 하지 않아 편리하게 작성할 수 있다.
+단, 작성하지 않은 인수가 적용될 수 있도록 기본값을 설정해 주는 것이 좋다.
+
+
+@mixin 믹스인이름($매개변수A: 기본값, $매개변수B: 기본값) {
+  스타일;
+}
+
+@include 믹스인이름($매개변수B: 인수);
+*/
+.quick_menu {
+  width: 200px;
+  background-color: #31708F;
+  color: #fff;
+  position: absolute;
+  top: 300px;
+  left: 200px; }
+
+/*
+가변 인수(Variable Arguments)
+
+때때로 입력할 인수의 개수가 불확실한 경우가 있다.
+그럴 경우 가변 인수를 사용할 수 있다.
+가변 인수는 매개변수 뒤에 ...을 붙여줍니다.
+
+
+@mixin 믹스인이름($매개변수...) {
+  스타일;
+}
+
+@include 믹스인이름(인수A, 인수B, 인수C);
+*/
+.text_area {
+  width: 100%;
+  height: 150px;
+  background: url("/images/a.png") no-repeat 10px 20px, url("/images/b.png") no-repeat, url("/images/c.png"); }
+
+/*# sourceMappingURL=event2.css.map */

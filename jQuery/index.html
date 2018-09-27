@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<script>
+ $(document).ready(function(){
+    
+    var userName=["geurim01","geurim02","geurim03","geurim04","geurim05","geurim06"];
+    
+    document.write(userName[0]+"<br><br><br>");
+    
+    var a = 10;
+    var b = ++a
+     
+     document.write("a="+a, "b="+b + "<br><br>");
+    
+
+    
+    for (i=1; i<10; i++){
+      var dan = 3;
+      document.write(dan+"x"+i+"="+dan*i+"<br><br><br>");
+    }
+    
+    function gugudan(dan2) {
+    	for(num=1; num<10; num++){
+    		document.write(dan2 + "x" + num + "=" + dan2*num + "<br>");
+    		
+        }
+	}
+	
+	gugudan(2);
+	
+ });
+  
+  
+  </script>
+
+
+
+
+
+
+</body>
+</html>

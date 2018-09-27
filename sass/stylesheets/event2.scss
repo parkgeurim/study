@@ -1,0 +1,235 @@
+
+/*
+https://heropy.blog/2018/01/31/sass/
+
+cd D:\sass
+d:
+scss --watch stylesheets:stylesheet/compiled
+
+*/
+
+// @if
+@if (조건) {
+	/* 조건이 참일 때 구문 */
+}
+
+// @if @else
+@if (조건) {
+	/* 조건이 참일 때 구문 */
+} @else {
+	/* 조건이 거짓일 때 구문 */
+}
+
+// @if @else if
+@if (조건1) {
+	/* 조건1이 참일 때 구문 */
+} @else if (조건2) {
+	/* 조건2가 참일 때 구문 */
+} @else {
+	/* 모두 거짓일 때 구문 */
+}
+
+$color: green;
+body {
+	width:1000px;
+	margin:0 auto;
+	@if $color == strawberry {
+		color: #FE2E2E;
+	} @else if $color == green {
+		color: green;
+	} @else if $color == banana {
+		color: #FFFF00;
+	} @else {
+		color: #2A1B0A;
+	}
+}
+
+
+@mixin large-text {
+
+	font: {
+		size:24px;
+		weight:700;
+	}
+	color:#F0AD4E;
+	line-height:5em;
+}
+
+@mixin medium-text {
+
+	font: {
+		size:18px;
+		weight:700;
+	}
+	color:#00B3EE;
+	line-height:2em;
+}
+
+@mixin small-text {
+
+	font: {
+		size:14px;
+		weight:400;
+	}
+	color:#7A43B6;
+	line-height:1em;
+
+}
+
+.container{width:1000px;
+	section{
+		float:left;
+		width:30%;
+		height:300px;
+		margin-left:5%;
+		&:first-child {
+			margin-left:0;
+			@include large-text;
+		}
+	}
+
+}
+
+section{
+	&:nth-child(2) {
+		@include medium-text;
+	}
+	&:nth-child(3) {
+		@include small-text;
+	}
+
+}
+
+/*
+인수(Arguments)
+Mixin은 함수(Functions)처럼 인수(Arguments)를 가질 수 있다.
+매개변수(Parameters)란 변수의 한 종류로, 제공되는 여러 데이터 중 하나를 가리키기 위해 사용된다.
+제공되는 여러 데이터들을 전달인수(Arguments) 라고 부른다.
+
+
+// SCSS
+@mixin 믹스인이름($매개변수) {
+  스타일;
+}
+@include 믹스인이름(인수);
+
+// Sass
+=믹스인이름($매개변수)
+  스타일
+
++믹스인이름(인수)
+
+*/
+
+
+@mixin dash-line ($width, $color) {
+	border:$width dashed $color;
+	box-sizing:border-box;
+}
+
+@mixin dotted-line ($width, $color) {
+	border:$width dotted $color;
+	box-sizing:border-box;
+}
+
+
+section{
+
+	&:nth-child(2) {
+		@include dash-line(2px,orange)
+	}
+}
+
+section{
+
+	&:nth-child(3){
+		@include dotted-line(4px,green)
+	}
+}
+
+
+/*
+키워드 인수(Keyword Arguments)
+
+Mixin에 전달할 인수를 입력할 때 명시적으로 키워드(변수)를 입력하여 작성할 수 있다.
+별도의 인수 입력 순서를 필요로 하지 않아 편리하게 작성할 수 있다.
+단, 작성하지 않은 인수가 적용될 수 있도록 기본값을 설정해 주는 것이 좋다.
+
+
+@mixin 믹스인이름($매개변수A: 기본값, $매개변수B: 기본값) {
+  스타일;
+}
+
+@include 믹스인이름($매개변수B: 인수);
+*/
+
+@mixin position(
+	$p : null,
+	$t : null,
+	$b : null,
+	$l : null,
+	$r : null
+) {
+	position:$p;
+	top:$t;
+	bottom:$b;
+	left:$l;
+	right:$r;
+}
+
+.quick_menu {
+	width:200px;
+	background-color:#31708F;
+	color:#fff;
+
+	@include position(absolute,$t: 300px, $l: 200px);
+}
+
+
+/*
+가변 인수(Variable Arguments)
+
+때때로 입력할 인수의 개수가 불확실한 경우가 있다.
+그럴 경우 가변 인수를 사용할 수 있다.
+가변 인수는 매개변수 뒤에 ...을 붙여줍니다.
+
+
+@mixin 믹스인이름($매개변수...) {
+  스타일;
+}
+
+@include 믹스인이름(인수A, 인수B, 인수C);
+*/
+
+@mixin bg($width, $height, $bg-values...){
+	width:$width;
+	height:$height;
+	background:$bg-values;
+}
+
+.text_area {
+	@include bg(
+			100%,
+			150px,
+			url("/images/a.png") no-repeat 10px 20px,
+			url("/images/b.png") no-repeat,
+			url("/images/c.png")
+	);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
