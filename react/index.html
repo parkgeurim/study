@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>react</title>
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+<body>
+<!--
+  JSX를 자바스크립트로 변환
+-->
+
+  <div id="container"></div>
+  <script type="text/babel">
+    
+    // 컴포넌트 만들기
+    var Hello = React.createClass({
+        
+        render : function(){
+          return(
+              <p>hellow, {this.props.greatTarget}!</p>
+              // props 속성
+          );
+        }
+    
+    });
+    
+    ReactDOM.render(
+    	<div>
+    	  <Hello greatTarget="g1"/>
+          <Hello greatTarget="g2"/>
+          <Hello greatTarget="g3"/>
+        </div>
+        ,
+        
+        document.querySelector("#container")
+    	
+    )
+    
+    
+    // this.props.children 을 사용해 자식요소에 접근
+    
+    var buttonify = React.createClass({
+        render: function(){
+        	return (
+        		<div>
+                    <button type={this.props.behavior}>{this.props.children}</button>
+                </div>
+            );
+        }
+        
+    });
+    
+    ReactDOM.render (
+    	<div>
+          <buttonify behavior="Submit">SEND DATA</buttonify>
+        </div>,
+        document.querySelector("#container")
+    )
+    
+
+/*
+브라우저는 jsx를 이해하지 못하므로 자바스크립트로 바꾸는 중간 단계가 필요하다.
+2가지 방법
+1)  jsx 가 트랜스파일된  자바스크립트 결과물을 생성시키는 방법
+2)  바벨 라이브러리를 사용해 브라우저상에서 jsx를 자바스크립트 언어로  번영하는 방법
+
+
+JSX 팁 : 다중 엘리먼트 출력f
+*/
+    
+</script>
+
+
+
+
+</body>
+</html>
