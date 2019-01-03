@@ -298,3 +298,130 @@ export default App;
 
 
 
+
+*props  와 state ?
+            - props와 state는 react의 컴포넌트 객체에서 DOM 객체를 제어할때 꼭필요한 개념중하나
+            - props : properties 의 줄임말, props는 React에서 사용자가 컴포넌트에 전달해서 보관하길 원하는 데이터
+            즉, 컴포넌트 내에서 데이터가 보관되면, 이 데이터는 수정되지 않고 보존되어야 하는 법칙이 성립된다.
+            만약, props의 값을 변경하고자 할때에는 컴포넌트 내부가 아닌, 부모 컴포넌트에서 이에 대한 부분이 변경되어야한다. 
+            예)
+```javascript
+    var post = {title : '테스트 타이틀'}
+    <Postdiv post = {post} />
+```
+부모객체에서 자식객체에 props를 넘겨주는 예시,
+부모객체에서 자식객체에 post라는 데이터를 props 형태로 전달해줄 수 있다.
+이는 부모객체에서 넘겨주는 데이터이기때문에 실제 사용하는 컴포넌트 내에서 props의 변경은 원칙적으로 금지되어있다.
+                
+ - state ? 
+ - props와의 차이점이라면, state는 컴포넌트 내부에 존재하기 때문에 상태값 변경이 가능.
+ ```javascript
+ var post = React.createClass ({
+    get InitialState : function () {
+        return {
+            title : '테스트타이틀'
+        }
+    },
+    render : function () {
+        return (
+            <div>
+                <p>{this.state.title}</p>
+            </div>
+        )
+    }
+ });
+ ```
+state에 관련된 간략한 예시입니다. 우리는 post라는 컴포넌트에서 getInitialState를 통해서 컴포넌트 내에서 쓰일 state값을 리턴받는다.
+getInitialState는 return을 통해 state 초기값을 반환해 주게 되는데, 
+이렇게 함으로써 컴포넌트 내부에서는 this.state를 통해 상태값을 제어할 수 있다.
+
+render 함수에서는 바로 getInitialState에서 받은 state값 중, title을 출력하고 있음을 알 수 있다. 
+이렇게 초기화된 state값을 출력할 수 있지만, 중간에 state값을 바꿔줄 수도 있다.
+````javascript
+var post = React.createClass({
+    getInitialState : function () {
+        return {
+            title : '테스트타이틀'
+        }
+    },
+ 
+    handleChange: function () {
+        this.setState({title:'테스트타이틀1'});
+    },
+ 
+    render : function () {
+        return (
+            <div>
+                <p>{ this.state.title }</p>
+                <input type="text" onChange={ this.handleChange } />
+            </div>
+        )
+    }
+});
+````
+        
+
+4. 새 컴포넌트 만들기
+    1) src 디렉토리에 MyName 컴포넌트 만들기
+        - 자신이 받아온 props값은 this. 키워드를 통하여 조회할 수 있다.
+        - name 이라는 props를 보여주도록 설정
+        
+MyName.js
+```javascript
+import React, { Component } from 'react';
+
+class MyName extends Component {
+  render() {
+    return (
+      <div>
+        안녕하세요! 제 이름은 <b>{this.props.name}</b> 입니다.
+      </div>
+    );
+  }
+}
+
+export default MyName; 
+```
+
+App.js
+```javascript
+import React, { Component } from 'react';
+import MyName from './MyName';
+
+class App extends Component {
+  render() {
+    return (
+      <MyName name="리액트" />
+    );
+  }
+}
+
+export default App;
+```
+import를 통하여 컴포넌트를 불러오고, 랜더링
+이렇게 컴포넌트를 만들고나면, 일반 태그를 작성하듯이 작성.
+props 값은 name="리액트" 이런식으로 태그의 속성을 설정해주는 것처럼 해준다.
+
+5. defaultProps
+    - props를 빠뜨렸을때, 특정상황에 props를 비워야할때 props의 기본값을 설정 - > defaultProps
+
+MyName.js
+```javascript
+import React, { Component } from 'react';
+
+class MyName extends Component {
+  static defaultProps = {
+    name: '기본이름'
+  }
+  render() {
+    return (
+      <div>
+        안녕하세요! 제 이름은 <b>{this.props.name}</b> 입니다.
+      </div>
+    );
+  }
+}
+
+export default MyName;
+
+```
