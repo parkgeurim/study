@@ -25,7 +25,7 @@ class App extends Component {
                  >react
             </div>
 
-            <MyName name="리액트"/>
+            <MyName />
         </div>
 
 

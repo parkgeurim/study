@@ -425,3 +425,83 @@ class MyName extends Component {
 export default MyName;
 
 ```
+이렇게 하면 만약에 <MyName /> 이런식으로 name 값을 생략해버리면 “기본이름” 이 나타난다. 
+참고로, defaultProps 는 다음과 같은 형태로도 설정 할 수 있다.
+
+````javascript
+import React, { Component } from 'react';
+
+class MyName extends Component {
+  render() {
+    return (
+      <div>
+        안녕하세요! 제 이름은 <b>{this.props.name}</b> 입니다.
+      </div>
+    );
+  }
+}
+
+MyName.defaultProps = {
+  name: '기본이름'
+};
+
+export default MyName;
+````
+
+6. 함수형 컴포넌트
+-함수형 컴포넌트와 클래스형 컴포넌트의 주요 차이점은, state 와 LifeCycle 이 빠져있다는 점이다. 그래서, 
+컴포넌트 초기 마운트가 아주 미세하게 빠르고, 메모리 자원을 덜 사용. 
+미세한 차이이니, 컴포넌트를 무수히 많이 렌더링 하게 되는게 아니라면 성능적으로 큰 차이는 없다
+````javascript
+import React from 'react';
+
+const MyName = ({ name }) => {
+  return (
+    <div>
+      안녕하세요! 제 이름은 {name} 입니다.
+    </div>
+  );
+};
+
+export default MyName;
+````
+
+7. state
+- 동적인 데이터를 다룰때
+- Counter 파일 생성
+Counter.js
+````javascript
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  state = {
+    number: 0
+  }
+
+  handleIncrease = () => {
+    this.setState({
+      number: this.state.number + 1
+    });
+  }
+
+  handleDecrease = () => {
+    this.setState({
+      number: this.state.number - 1
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>카운터</h1>
+        <div>값: {this.state.number}</div>
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+````
+
