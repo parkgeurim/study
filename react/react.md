@@ -295,10 +295,6 @@ export default App;
 ```
 
 
-
-
-
-
 *props  와 state ?
             - props와 state는 react의 컴포넌트 객체에서 DOM 객체를 제어할때 꼭필요한 개념중하나
             - props : properties 의 줄임말, props는 React에서 사용자가 컴포넌트에 전달해서 보관하길 원하는 데이터
@@ -504,4 +500,117 @@ class Counter extends Component {
 
 export default Counter;
 ````
+
+컴포넌트에 메소드는 다음과 같은 형식으로도 작성이 가능
+````javascript
+  handleIncrease() {
+    this.setState({
+      number: this.state.number + 1
+    });
+  }
+
+  handleDecrease() {
+    this.setState({
+      number: this.state.number - 1
+    });
+  }
+````
+이렇게 하면, 나중에 버튼 클릭에서 클릭이벤트가 발생했을때, this가 undefined로 나타나서 제대로 처리되지 않게된다.
+이는 함수가 버튼의 클릭이벤트로 전달이 되는 과정에서 this와의 연결이 끊겨버리기 때문,
+이를 고쳐주려면 constructor에서 아래와 같이 해줌.
+````javascript
+  constructor(props) {
+    super(props);
+    this.handleIncrease = this.handleIncrease.bind(this);
+    this.handleDecrease = this.handleDecrease.bind(this);
+  }
+````
+
+   1) setSatate
+    - state에 있는 값을 바꾸기 위해서는 this.setState를 거쳐야 함.
+    리액트에서는, 이 함수가 호출되면 컴포넌특 리렌더링 되도록 설계되어있다.
+    setState는 객체로 전달되는 값만 업데이트해줌
+    state에 number값밖에 없지만 다음과 같이 다른 값이 있다고 가정.
+    
+````javascript
+state = {
+    number : 0,
+    foo : 'bar'
+}
+````
+this.setState({number:1});을 하게 된다면, foo는 그대로 남고, number 값만 업데이트 된다.
+
+````javascript
+state = {
+    number : 0,
+    foo : {
+        bar : 0,
+        foobar : 1
+    }
+}
+
+// 아래와 같이 작성해도 foobar 값이 업데이트 되지 않는다.
+this.setState({
+    foo: {
+        bar : 2
+    }
+})
+
+// 아래와 같이 하게되면 그냥 기존의 foo 객체가 바뀌어버린다.
+{
+    number : 0,
+    foo : {
+        foobar : 2
+    }
+}
+
+// 그 대신에 위와같은 상황에서는 아래와 같이해주어야함
+// 기존의 객체안에 있는 내용을 해당위치에 풀어준다는 의미,
+this.setInterval({
+    number : 0,
+    foo : {
+        ...this.state.foo,
+        foobar:2
+    }
+});
+````
+
+   2) setState에 객체 대신 함수 전달하기
+   - setState를 사용하여 값을 업데이트하게 될때, 기존의 값을 참고하여 값을 업데이트할때, 좀더 나은 문법을 사용할 수도 있다.
+   
+````javascript
+this.setState({
+    number : this.state.number + 1
+});
+
+
+// setState updater 함수를 만들어서 전달해줌
+this.setState(
+  (state) = > ({
+    number: state.number
+  })  
+);
+
+// (state)가 ({ number })가 됨. 비구조 할당이라는 문법
+this.setState(
+    ({ number }) = > ({
+        number : number + 1
+    })
+)
+
+const { number } = this.state;
+this.setState({
+    number : number + 1
+})
+````
+
+* 리액트에서 이벤트함수 설정시 주의
+   1) 이벤트이름을 설정 할 때 camelCase 로 설정해주어야 합니다. onclick 은 onClick, onmousedown 은 onMouseDown, onchange 는 onChange
+   2) 이벤트에 전달해주는 값은 함수 여야 합니다. 만약에 onClick={this.handleIncrease()} 이런식으로 하게 된다면, 
+   렌더링을 할 때 마다 해당 함수가 호출이됩니다. ( 메소드를 호출하지 XXXXXXXXX)
+   
+
+
+
+
 

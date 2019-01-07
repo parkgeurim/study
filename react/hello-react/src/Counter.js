@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './App.css';
 
 class Counter extends Component {
     state = {
@@ -6,25 +7,29 @@ class Counter extends Component {
     }
 
     handleIncrease = () => {
-        this.setState ({
-            number : this.state.number + 1
-        });
+        const { number } = this.state;
+        this.setState({
+            number : number +1
+        })
     }
 
     handleDecrease = () => {
-        this.setState ({
-            number : this.state.number - 1
-        });
+        this.setState (
+            ({ number }) => ({
+                number : number -1
+            })
+        );
     }
-
 
     render() {
         return (
-            <div>
+            <div className={"buttonWrap"}>
                 <h1>카운터</h1>
                 <div>값 : {this.state.number}</div>
-                <button onClick={this.handleIncrease}>+</button>
-                <button onClick={this.handleDecrease}>-</button>
+                <div className ={"buttonBox"}>
+                    <button onClick={this.handleIncrease}>+</button>
+                    <button onClick={this.handleDecrease}>-</button>
+                </div>
             </div>
         )
     }
