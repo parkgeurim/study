@@ -85,3 +85,195 @@ shouldComponentUpdate(nextProps, nextState) {
 }
 ````
 
+componentWillUpdate
+- 이 api는 shouldComponentUpdate 에서 true를 반환했을때 호출.
+false를 반환했다면 이 함수는 호출되지 않는다.
+여기서 주로 애니메이션 효과를 초기화하거나, 이벤트 리스너를 없애는 작업을 한다.
+이 함수가 호출된 다음엔 render()가 호출된다.(v16.3이후)
+기존 기능은 getSnapshotBeforeUpdate 로 대체 될 수 있다.
+
+````javascript
+componentWillUpdate(nextProps, nextState) {
+
+}
+````
+
+
+3. 컴포넌트 제거
+
+componentWillUnmount
+- 등록했던 이벤트 제거, 만약 setTimeout 걸은것이 있다면, clear Timeout을 통하하여 제거
+외부 라이브러리를 사용한게있고, 해당 라이브러리에 dispose 기능이 있다면 여기서 호출
+````javascript
+componentWillUnmount() {
+  // 이벤트, setTimeout, 외부 라이브러리 인스턴스 제거
+}
+````
+
+사용해보기
+- 콘솔메세지를 확인해보면 5배수일때 컴포넌트가 리렌딩 되지 않는다.
+Counter.js
+````javascript
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  state = {
+    number: 0
+  }
+
+  constructor(props) {
+    super(props);
+    console.log('constructor');
+  }
+  
+  componentWillMount() {
+    console.log('componentWillMount (deprecated)');
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // 5 의 배수라면 리렌더링 하지 않음
+    console.log('shouldComponentUpdate');
+    if (nextState.number % 5 === 0) return false;
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate');
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+  }
+  
+
+  handleIncrease = () => {
+    const { number } = this.state;
+    this.setState({
+      number: number + 1
+    });
+  }
+
+  handleDecrease = () => {
+    this.setState(
+      ({ number }) => ({
+        number: number - 1
+      })
+    );
+  }
+  
+  render() {
+    console.log('render');
+    return (
+      <div>
+        <h1>카운터</h1>
+        <div>값: {this.state.number}</div>
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+````
+
+
+4. 컴포넌트 에러 발생
+- render 함수에서 에러가 발생한다면, 리액트 앱이 크래쉬 되어버린다.
+이러한 상황에 유용하게 사용할 수 있는 api
+
+componentDidCatch
+````javascript
+componentDidCatch {
+    this.setState({
+        error: true
+    });
+}
+````
+- 에러가 발생되면 conponentDidCatch 가실행. state.error를 true로 설정하고, render함수쪽에서 에러를 띄워줌
+- 컴포넌트 자신의 render 함수에서 에러가 발생해버리는것은 잡아낼 수 없지만,
+컴포넌트의 자식 컴포넌트 내부에서 발생하는 에러들을 잡아낼 수 있다.
+
+````javascript
+import React, { Component } from 'react';
+
+const Problematic = () => {
+  throw (new Error('버그가 나타났다!'));
+  return (
+    <div>
+      
+    </div>
+  );
+};
+
+class Counter extends Component {
+  // ... 생략
+  
+  render() {
+    return (
+      <div>
+        <h1>카운터</h1>
+        <div>값: {this.state.number}</div>
+        { this.state.number === 4 && <Problematic /> }
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+````
+Error뜨는 부분에서 X 를 누르면 아무것도 뜨지 않음.
+problematic 렌더링이 될 때 에러가 발생했음을 알리는 throw를 사용
+
+componentDidCatch를 통하여 에러잡기
+````javascript
+import React, { Component } from 'react';
+
+const Promblematic = () => {
+  throw (new Error('버그가 나타났다!'));
+  return (
+    <div>
+      
+    </div>
+  );
+};
+
+class Counter extends Component {
+  state = {
+    number: 0,
+    error: false
+  }
+
+  // (...)
+  
+  componentDidCatch(error, info) {
+    this.setState({
+      error: true
+    });
+  }
+  
+  render() {
+    if (this.state.error) return (<h1>에러발생!</h1>);
+
+    return (
+      <div>
+        <h1>카운터</h1>
+        <div>값: {this.state.number}</div>
+        { this.state.number === 4 && <Promblematic /> }
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+````
+
+

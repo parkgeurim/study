@@ -593,7 +593,7 @@ this.setState(
 
 // (state)가 ({ number })가 됨. 비구조 할당이라는 문법
 this.setState(
-    ({ number }) = > ({
+    ({ number }) = > ({녀
         number : number + 1
     })
 )

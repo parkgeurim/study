@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/parkgeurim/study#readme",
   "dependencies": {
+    "bootstrap": "^4.2.1",
     "http": "0.0.0"
   }
 }
