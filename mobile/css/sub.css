@@ -1,0 +1,38 @@
+/*reset*/
+*{ margin:0; padding:0; }
+body, div, .password-wrap, .container {margin:0; padding:0;}
+a:link, a:visited{ text-decoration:none; color:#000}
+a:hover, a:focus{ text-decoration:none; color:#000;}
+li{list-style:none;}
+/*//reset*/
+
+.cont-wrap {width:640px; margin:0 auto; background-color:#eee;}
+/*상단로고*/
+.logo-wrap {text-align:center; background-color:#00b3ee;}
+/*비밀번호입력*/
+.password-box {padding-top:10%; background-color:pink; text-align:center;}
+.password-box .txt {padding-bottom:10px; font-size:2em;}
+.password-box .box-in {padding-top:2%;}
+.password-box .box-in span {display:inline-block; width:14px; height:14px; margin:0 2%; background-color:#ddd; border-radius: 50%;}
+.password-box .box-in span.on {background-color:#666;}
+/*비밀번호숫자*/
+.num-box {padding-top:10%;}
+.num-box ul {width:80%; margin:0 auto; background-color:#fff;}
+.num-box ul:after {display:block; content:""; clear:both;}
+.num-box ul li {float:left; width:33.333%; line-height:2.5em; text-align:center; font-size:2.5em;}
+.num-box ul li span {padding:0 8px; border-bottom:1px solid #ccc;}
+.num-box ul li.border_n span {border-bottom:none;}
+/*반응형*/
+@media all and (min-width:300px) and (max-width:640px) {
+    .password-wrap {width:100%;}
+    .num-box ul li {font-size:1.8em;}
+}
+
+
+
+
+
+
+
+
+
