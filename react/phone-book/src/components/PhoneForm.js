@@ -30,12 +30,16 @@ class PhoneForm extends Component {
                     value={this.state.name}
                     onChange={this.handleChange}
                     name="name"
+                    maxLength={8}
                 />
                 <input
-                    placeholder="전화번호"
+                    placeholder="전화번호 (- 없이 입력해주세요.)"
                     value={this.state.phone}
                     onChange={this.handleChange}
                     name="phone"
+                    maxLength={11}
+                    minLength={9}
+                    numberOnly
                 />
                 <button type="submit">등록</button>
             </form>

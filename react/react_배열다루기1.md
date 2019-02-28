@@ -159,7 +159,7 @@ class PhoneInfoList extends Component {
 
 export default PhoneInfoList;
 ````
-data라는 배여을 가지고 와서 map을 통하여 jsx로 변환. 그 과정에서 key라는 값도 설정
+data라는 배열을 가지고 와서 map을 통하여 jsx로 변환. 그 과정에서 key라는 값도 설정
 key는 리액트에서 배열을 렌더링할때 필요한 값
 리액트는 배열을 랜더링할때 값을 통하여 업데이트 성능을 최적화.
 

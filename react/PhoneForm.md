@@ -83,7 +83,7 @@ input name값을 부여하여 구분,
 이 name값은 event.target.name을 통하여 조회가능하다.
 
 
-부모 컴포넌트에게 정보 전달하기\
+부모 컴포넌트에게 정보 전달하기
 - 부모 컴포넌트에서 메소드를 만들고, 이 메소드를 자식에게 전달한 다음에 자식 내부에서 호출하는 방식을 사용
 App에서 handleCreate라는 메소드를 만들고, 이를 PhoneForm한테 전달.
 PhoneForm쪽에서 버튼을 만들어 submit이 발생하면 props로 받은 함수를 호출하에 App에서
