@@ -19,6 +19,9 @@ var __globalBxslider = {
         var _maxSlides = $(attr).attr("data-maxSlides"); // 최대 보여지는 갯수
         _maxSlides = _maxSlides && !isNaN(parseInt(_maxSlides)) ? parseInt(_maxSlides) : 1;
 
+        var _minSlides = $(attr).attr("data-minSlides"); // 최소 보여지는 갯수
+        _minSlides = _minSlides && !isNaN(parseInt(_minSlides)) ? parseInt(_minSlides) : 1;
+
         var _slideMargin = $(attr).attr("data-slideMargin"); // 슬라이드 사이 margin 값
         _slideMargin = _slideMargin && !isNaN(parseInt(_slideMargin)) ? parseInt(_slideMargin) : 0;
 
@@ -59,7 +62,7 @@ var __globalBxslider = {
         __globalBxslider.bxList[__globalBxslider.bxList.length] = attr.bxSlider = $('.bxslider',attr).bxSlider({
             slideWidth: wd
             ,slideMargin: _slideMargin
-            ,minSlides: 1
+            ,minSlides: _minSlides // 최소 보여지는 갯수
             ,maxSlides: _maxSlides // 최대 보여지는 갯수
             ,speed: _speed
             ,pause: _delay
@@ -72,7 +75,7 @@ var __globalBxslider = {
             ,controls: _controls
             ,touchEnabled: _touch
             ,infiniteLoop: _loop
-            ,onSliderLoad:function(){
+            ,onSliderLoad:function(el){
                 //ⓓ bxslider onSliderLoad 이벤트 수정
                 // LazyLoad 옵션이 켜져있을 경우 슬라이드 내부의 이미지는 data-original로 실제 로드하지 않으며
                 // 슬라이드 로드와 슬라이드 이동 직전에 자신과 다음의 이미지를 로드한다
@@ -130,11 +133,33 @@ var __globalBxslider = {
                     $('.bxslider li').removeClass('on');
                     el.next('li').addClass('on');
                 }
+                if(el.context.className.indexOf("slide-type2") > 0){
+                    ($('.bxslider li').removeClass('on'));
+                    el.next('li').addClass('on');
+                    el.next('li').next('li').addClass('on');
+                    el.next('li').next('li').next('li').addClass('on');
+                    el.next('li').next('li').next('li').next('li').addClass('on');
+                }
+                if(el.context.className.indexOf("slide-type3") > 0){
+                    ($('.bxslider li').removeClass('off'));
+                    el.prev('li').next('li').addClass('off');
+                    el.prev('li').addClass('off');
+                    el.prev('li').prev('li').addClass('off');
+                    el.prev('li').prev('li').prev('li').addClass('off');
+                    el.prev('li').prev('li').prev('li').prev('li').addClass('off');
+                }
             }
             ,onSlidePrev: function(el) {
                 if(el.context.className.indexOf("slide-type1") > 0){
                     $('.bxslider li').removeClass('on');
                     el.next('li').addClass('on');
+                }
+                if(el.context.className.indexOf("slide-type2") > 0){
+                    $('.bxslider li').removeClass('on');
+                    el.next('li').addClass('on');
+                    el.next('li').next('li').addClass('on');
+                    el.next('li').next('li').next('li').addClass('on');
+                    el.next('li').next('li').next('li').next('li').addClass('on');
                 }
             }
             //infiniteLoop: false
