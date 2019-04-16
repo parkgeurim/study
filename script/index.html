@@ -177,7 +177,7 @@
 
   // map
   // 배열.map((요소, 인덱스, 배열) = > {return 요소});
-  let data = [1, 2, 3, 4, 5]
+  let data = [1, 2, 3, 4, 5];
 
   // forEach 를 사용해서 원소의 값들을 각각 3씩 증가시키기
   let result = [];
@@ -342,11 +342,107 @@
   result7; // [1, 3]
 
 
+  // filter
+  const datas = [1, 2, 3, 4, 5]
+  const oddNumber = datas.filter(val => {return val % 2 != 0});
+  console.log(oddNumber); // [1, 3, 5]
+  console.log(datas);  //[1, 2, 3, 4, 5]
+  // filter 메서드의 인자로 전달된 함수는 조건자 함수
+  //filter 메서드는 호출한 원래 배열을 변화시키지 않는다.
+
+  // 10이하 요소 걸러내기
+  function inBingEnough(value) {
+    return value >= 10;
+  }
+  var filtered = [12,6,4,2,49,109].filter(inBingEnough);
+  console.log(filtered); // [12, 49, 109]
+
+  // Json에서 무효한 항목 거르기
+  var arr = [
+    { id: 15},
+    { id: -1},
+    { id: 0},
+    { id: 3},
+    { id: 12.2},
+    { },
+    { id: null},
+    { id: NaN},
+    { id: 'undefined'}
+  ]
+  var invalidEntries = 0;
+  function isNumber(obj) {
+    return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
+  }
+
+  function filterById (item) {
+    if (isNumber(item.id) && item.id !==0) {
+      return true;
+    }
+    invalidEntries++;
+    return false;
+  }
+  var arrById = arr.filter(filterById);
+  console.log('Filtered Array \n', arrById);
+  // Filtered Array
+  // {id: 15}
+  // {id: -1}
+  // {id: 3}
+  // {id: 12.2}
+
+  //배열 내용 검색하기위해 filter 사용
+  var fruit = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+  // 검색 조건에 따른 배열 필터링
+  function filterItems (query) {
+    return fruit.filter(function (el) {
+      return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    })
+  }
+  console.log(filterItems('ba')); // banana
+  console.log(filterItems('m')); // mango
+
+
+  // every, some
+  // 배열을 순회하면서 특정 조건을 배열의 값들이 만족시키는지 검사하는 메서드
+  // 호출한 배열이 결론적으로 조건을 만족시키는지(true), 만족시키지 못하는지(false)를 알려준다.
+  // every와 some의 차이는 every가 배열의 모든 값이 조건을 만족해야, some은 일부만 만족해도 true를 return 한다.
+
+  const datass = [1,2,3,4,5];
+  const isAllOdd = datass.every(val => {return val%2 != 0}); // 홀수 ?
+  console.log(isAllOdd); // false
+
+  const isSomeOdd = datass.some(val => {return val % 2 !=0})
+  console.log(isSomeOdd); // true
+  // 모든값이 true가 아니어도 true를 return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // css 관련 js
-
   document.querySelector('#selector2').style.background = 'black';
   document.querySelector('#selector2').style.border = '2px solid #f00';
+
+
 
 
 

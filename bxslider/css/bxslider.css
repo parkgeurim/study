@@ -89,32 +89,37 @@ ul.bxslider {
     line-height: 0;
 }
 /* DIRECTION CONTROLS (NEXT / PREV) */
-.bx-wrapper .bx-prev {
-    left: 10px;
-    background: url('images/controls.png') no-repeat 0 -32px;
-}
-.bx-wrapper .bx-prev:hover,
-.bx-wrapper .bx-prev:focus {
-    background-position: 0 0;
-}
-.bx-wrapper .bx-next {
-    right: 10px;
-    background: url('images/controls.png') no-repeat -43px -32px;
-}
-.bx-wrapper .bx-next:hover,
-.bx-wrapper .bx-next:focus {
-    background-position: -43px 0;
-}
+
 .bx-wrapper .bx-controls-direction a {
     position: absolute;
     top: 50%;
     margin-top: -16px;
     outline: 0;
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 45px;
     text-indent: -9999px;
     z-index: 9999;
 }
+
+.bx-wrapper .bx-prev {
+    left: 10px;
+    background: url('../img/slide_controls.png') no-repeat 0 -44px;
+}
+.bx-wrapper .bx-prev:hover,
+.bx-wrapper .bx-prev:focus {
+    background-position: 0 0;
+}
+
+.bx-wrapper .bx-next {
+    right: 10px;
+    background: url('../img/slide_controls.png') no-repeat -44px -44px;
+}
+
+.bx-wrapper .bx-next:hover,
+.bx-wrapper .bx-next:focus {
+    background-position: -44px 0;
+}
+
 .bx-wrapper .bx-controls-direction a.disabled {
     display: none;
 }
@@ -175,3 +180,5 @@ ul.bxslider {
     font-size: .85em;
     padding: 10px;
 }
+
+
