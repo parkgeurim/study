@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <title> sliding </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <style>
+		*{margin:0; padding:0;}
+		li{list-style:none;}
+		html{ height:100%; }
+		body{}
+		h1{ text-align:center; padding:20px 0; }
+		h1 img{width:40%;}
+	  	.box{font-size:100%; cursor:pointer;}
+	  	.plus, .minus {cursor:pointer;margin-bottom:100px;}
+	  
+  </style>
+  <script>
+	$(function(){
+		
+		var plus = 0;
+		var minus = 0;
+		
+		$(".plus").click(function(){
+			if(plus == 0){
+				$('.box').css('fontSize','200%');
+				plus=1;
+				minus=0;
+			}else if(plus == 1){
+				$('.box').css('fontSize','400%');
+				minus=1;
+				plus=2;
+			}else if(plus == 2){
+				$('.box').css('fontSize','600%');
+				minus=2;
+			}
+		});
+
+		$(".minus").click(function(){
+			if(minus == 0 ){
+				$('.box').css('fontSize','100%');
+				plus=0;
+			} else if(minus == 1){
+				$('.box').css('fontSize','200%');
+				minus=0;
+				plus=1;
+			}else if(minus == 2){
+				$('.box').css('fontSize','400%');
+				minus=1;
+				plus=2;
+			}
+		});
+		
+	});
+
+
+  </script>
+ </head>
+ <body>
+	<div class="plus">
+		+
+	</div>
+ 	<div class="minus">
+		-
+	</div>
+ 
+ 	<div class="box">
+		box
+	</div>
+ </body>
+</html>
